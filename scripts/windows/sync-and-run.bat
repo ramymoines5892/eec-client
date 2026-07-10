@@ -63,13 +63,13 @@ if /I "%~1"=="pull-only" (
   exit /b 0
 )
 
-echo ====== [3/4] Checking port %PORT% ======
-netstat -ano | findstr :%PORT% >nul
-if %errorlevel%==0 (
-  echo Server already running on %OPEN_URL%
-  start "" "%OPEN_URL%"
-  exit /b 0
+echo ====== [3/4] Restarting any existing server on port %PORT% ======
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr :%PORT% ^| findstr LISTENING') do (
+  echo Killing old server PID %%a ...
+  taskkill /PID %%a /F /T >nul 2>&1
 )
+timeout /t 2 /nobreak >nul
+
 
 echo ====== [4/4] Starting dev server (hidden) ======
 where bun >nul 2>&1
