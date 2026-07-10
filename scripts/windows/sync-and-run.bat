@@ -71,13 +71,19 @@ if %errorlevel%==0 (
   exit /b 0
 )
 
-echo ====== [4/4] Starting dev server in background ======
+echo ====== [4/4] Starting dev server (hidden) ======
+set "VBS=%TEMP%\eec-run-hidden.vbs"
 where bun >nul 2>&1
 if %errorlevel%==0 (
-  start "EEC Dev Server" /D "%PROJECT_DIR%" /MIN cmd /c "bun run dev"
+  set "RUN_CMD=bun run dev"
 ) else (
-  start "EEC Dev Server" /D "%PROJECT_DIR%" /MIN cmd /c "npm run dev"
+  set "RUN_CMD=npm run dev"
 )
+> "%VBS%" echo Set WshShell = CreateObject("WScript.Shell")
+>> "%VBS%" echo WshShell.CurrentDirectory = "%PROJECT_DIR%"
+>> "%VBS%" echo WshShell.Run "cmd /c " ^& Chr(34) ^& "%RUN_CMD% ^> """"%LOG_DIR%\dev-server.log"""" 2^>^&1" ^& Chr(34), 0, False
+wscript "%VBS%"
+
 
 REM Wait until the port is actually listening (up to ~60s), then open browser.
 echo Waiting for server on port %PORT% ...
