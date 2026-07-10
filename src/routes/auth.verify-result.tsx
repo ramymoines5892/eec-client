@@ -15,7 +15,7 @@ export const Route = createFileRoute("/auth/verify-result")({
 function VerifyResultPage() {
   const t = useT();
   const nav = useNavigate();
-  const { markEmailVerified, credential } = usePrototypeStore();
+  const { markEmailVerified, state } = usePrototypeStore();
   const [status, setStatus] = useState<"loading" | "ok" | "error">("loading");
   const [error, setError] = useState<string>("");
 
