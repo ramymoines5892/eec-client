@@ -116,11 +116,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const setLanguage = usePrototypeStore((s) => s.setLanguage);
+
+  useEffect(() => {
+    // Detect browser language once on mount (only if user hasn't chosen yet)
+    const stored = localStorage.getItem("eec_prototype_v1");
+    if (!stored) {
+      const nav = navigator.language?.toLowerCase() ?? "en";
+      setLanguage(nav.startsWith("ar") ? "ar" : "en");
+    }
+  }, [setLanguage]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Toaster richColors position="top-center" closeButton />
     </QueryClientProvider>
   );
 }
