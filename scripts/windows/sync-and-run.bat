@@ -71,13 +71,16 @@ if %errorlevel%==0 (
   exit /b 0
 )
 
-echo ====== [4/4] Starting dev server ======
-start "" "%OPEN_URL%"
+echo ====== [4/4] Starting dev server in background ======
 where bun >nul 2>&1
 if %errorlevel%==0 (
-  call bun run dev
+  start "EEC Dev Server" /MIN cmd /c "cd /d "%PROJECT_DIR%" && bun run dev"
 ) else (
-  call npm run dev
+  start "EEC Dev Server" /MIN cmd /c "cd /d "%PROJECT_DIR%" && npm run dev"
 )
 
-pause
+REM Give the server a few seconds to boot, then open the browser and exit.
+timeout /t 5 /nobreak >nul
+start "" "%OPEN_URL%"
+exit /b 0
+
