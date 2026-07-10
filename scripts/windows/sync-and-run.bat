@@ -113,11 +113,15 @@ echo Waiting for server on port %PORT% ...
 set /a _tries=0
 :waitloop
 timeout /t 1 /nobreak >nul
-netstat -ano | findstr :%PORT% | findstr LISTENING >nul
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$c=New-Object Net.Sockets.TcpClient; try { $c.Connect('127.0.0.1', %PORT%); $c.Close(); exit 0 } catch { exit 1 }" >nul 2>&1
 if %errorlevel%==0 goto :ready
+if exist "%LOG_DIR%\dev-server.log" (
+  findstr /C:"Local:" "%LOG_DIR%\dev-server.log" >nul 2>&1
+  if !errorlevel!==0 goto :ready
+)
 set /a _tries+=1
 if %_tries% LSS 60 goto :waitloop
-echo [WARN] Server did not open port %PORT% within 60s. Check the "EEC Dev Server" window or %LOG_DIR%\dev-server.log.
+echo [WARN] Server did not look ready within 60s. Check %LOG_DIR%\dev-server.log.
 if exist "%LOG_DIR%\dev-server.log" (
   echo ====== Last dev-server log lines ======
   powershell -NoProfile -Command "Get-Content -LiteralPath '%LOG_DIR%\dev-server.log' -Tail 40"
