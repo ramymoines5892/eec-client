@@ -27,17 +27,21 @@ if not %errorlevel%==0 (
   exit /b 1
 )
 
-echo Enabling "Run as soon as possible after a missed start" ...
+echo Configuring triggers (every 3 days + at every logon) and catch-up settings ...
 powershell -NoProfile -Command ^
-  "$s = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Hours 1);" ^
-  "Set-ScheduledTask -TaskName '%TASK_NAME%' -Settings $s | Out-Null"
+  "$t1 = New-ScheduledTaskTrigger -Daily -DaysInterval 3 -At 9am;" ^
+  "$t2 = New-ScheduledTaskTrigger -AtLogOn;" ^
+  "$s  = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Hours 1);" ^
+  "Set-ScheduledTask -TaskName '%TASK_NAME%' -Trigger @($t1,$t2) -Settings $s | Out-Null"
 
 if %errorlevel%==0 (
-  echo [OK] Task created. Runs every 3 days at 09:00.
-  echo      If the PC was off/asleep, it will run automatically the next time it is on.
+  echo [OK] Task ready.
+  echo      - Runs every 3 days at 09:00
+  echo      - Runs automatically every time you log in to Windows
+  echo      - If the PC was off, it catches up the next time it is on
   echo Manage it in Task Scheduler under name: %TASK_NAME%
 ) else (
-  echo [WARN] Task created but could not enable "StartWhenAvailable". Run as Administrator.
+  echo [WARN] Task created but could not configure extra triggers. Run as Administrator.
 )
 
 pause
