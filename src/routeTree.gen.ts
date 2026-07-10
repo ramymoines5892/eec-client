@@ -9,38 +9,173 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SetupLandingRouteImport } from './routes/setup-landing'
+import { Route as LanguageRouteImport } from './routes/language'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthVerifySentRouteImport } from './routes/auth.verify-sent'
+import { Route as AuthVerifyResultRouteImport } from './routes/auth.verify-result'
+import { Route as AuthResetRouteImport } from './routes/auth.reset'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
+import { Route as AuthEmailRouteImport } from './routes/auth.email'
+import { Route as AuthCreatePasswordRouteImport } from './routes/auth.create-password'
 
+const SetupLandingRoute = SetupLandingRouteImport.update({
+  id: '/setup-landing',
+  path: '/setup-landing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LanguageRoute = LanguageRouteImport.update({
+  id: '/language',
+  path: '/language',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthVerifySentRoute = AuthVerifySentRouteImport.update({
+  id: '/auth/verify-sent',
+  path: '/auth/verify-sent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthVerifyResultRoute = AuthVerifyResultRouteImport.update({
+  id: '/auth/verify-result',
+  path: '/auth/verify-result',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthResetRoute = AuthResetRouteImport.update({
+  id: '/auth/reset',
+  path: '/auth/reset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthForgotRoute = AuthForgotRouteImport.update({
+  id: '/auth/forgot',
+  path: '/auth/forgot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthEmailRoute = AuthEmailRouteImport.update({
+  id: '/auth/email',
+  path: '/auth/email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthCreatePasswordRoute = AuthCreatePasswordRouteImport.update({
+  id: '/auth/create-password',
+  path: '/auth/create-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/language': typeof LanguageRoute
+  '/setup-landing': typeof SetupLandingRoute
+  '/auth/create-password': typeof AuthCreatePasswordRoute
+  '/auth/email': typeof AuthEmailRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/reset': typeof AuthResetRoute
+  '/auth/verify-result': typeof AuthVerifyResultRoute
+  '/auth/verify-sent': typeof AuthVerifySentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/language': typeof LanguageRoute
+  '/setup-landing': typeof SetupLandingRoute
+  '/auth/create-password': typeof AuthCreatePasswordRoute
+  '/auth/email': typeof AuthEmailRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/reset': typeof AuthResetRoute
+  '/auth/verify-result': typeof AuthVerifyResultRoute
+  '/auth/verify-sent': typeof AuthVerifySentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/language': typeof LanguageRoute
+  '/setup-landing': typeof SetupLandingRoute
+  '/auth/create-password': typeof AuthCreatePasswordRoute
+  '/auth/email': typeof AuthEmailRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/reset': typeof AuthResetRoute
+  '/auth/verify-result': typeof AuthVerifyResultRoute
+  '/auth/verify-sent': typeof AuthVerifySentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/language'
+    | '/setup-landing'
+    | '/auth/create-password'
+    | '/auth/email'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/reset'
+    | '/auth/verify-result'
+    | '/auth/verify-sent'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/language'
+    | '/setup-landing'
+    | '/auth/create-password'
+    | '/auth/email'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/reset'
+    | '/auth/verify-result'
+    | '/auth/verify-sent'
+  id:
+    | '__root__'
+    | '/'
+    | '/language'
+    | '/setup-landing'
+    | '/auth/create-password'
+    | '/auth/email'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/reset'
+    | '/auth/verify-result'
+    | '/auth/verify-sent'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LanguageRoute: typeof LanguageRoute
+  SetupLandingRoute: typeof SetupLandingRoute
+  AuthCreatePasswordRoute: typeof AuthCreatePasswordRoute
+  AuthEmailRoute: typeof AuthEmailRoute
+  AuthForgotRoute: typeof AuthForgotRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthResetRoute: typeof AuthResetRoute
+  AuthVerifyResultRoute: typeof AuthVerifyResultRoute
+  AuthVerifySentRoute: typeof AuthVerifySentRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/setup-landing': {
+      id: '/setup-landing'
+      path: '/setup-landing'
+      fullPath: '/setup-landing'
+      preLoaderRoute: typeof SetupLandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/language': {
+      id: '/language'
+      path: '/language'
+      fullPath: '/language'
+      preLoaderRoute: typeof LanguageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +183,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/verify-sent': {
+      id: '/auth/verify-sent'
+      path: '/auth/verify-sent'
+      fullPath: '/auth/verify-sent'
+      preLoaderRoute: typeof AuthVerifySentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/verify-result': {
+      id: '/auth/verify-result'
+      path: '/auth/verify-result'
+      fullPath: '/auth/verify-result'
+      preLoaderRoute: typeof AuthVerifyResultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/reset': {
+      id: '/auth/reset'
+      path: '/auth/reset'
+      fullPath: '/auth/reset'
+      preLoaderRoute: typeof AuthResetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/forgot': {
+      id: '/auth/forgot'
+      path: '/auth/forgot'
+      fullPath: '/auth/forgot'
+      preLoaderRoute: typeof AuthForgotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/email': {
+      id: '/auth/email'
+      path: '/auth/email'
+      fullPath: '/auth/email'
+      preLoaderRoute: typeof AuthEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/create-password': {
+      id: '/auth/create-password'
+      path: '/auth/create-password'
+      fullPath: '/auth/create-password'
+      preLoaderRoute: typeof AuthCreatePasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LanguageRoute: LanguageRoute,
+  SetupLandingRoute: SetupLandingRoute,
+  AuthCreatePasswordRoute: AuthCreatePasswordRoute,
+  AuthEmailRoute: AuthEmailRoute,
+  AuthForgotRoute: AuthForgotRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthResetRoute: AuthResetRoute,
+  AuthVerifyResultRoute: AuthVerifyResultRoute,
+  AuthVerifySentRoute: AuthVerifySentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
