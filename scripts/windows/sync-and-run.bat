@@ -71,13 +71,16 @@ if %errorlevel%==0 (
   exit /b 0
 )
 
-echo ====== [4/4] Starting dev server in background ======
+echo ====== [4/4] Starting dev server (hidden) ======
 where bun >nul 2>&1
 if %errorlevel%==0 (
-  start "EEC Dev Server" /D "%PROJECT_DIR%" /MIN cmd /c "bun run dev"
+  set "RUN_CMD=bun run dev"
 ) else (
-  start "EEC Dev Server" /D "%PROJECT_DIR%" /MIN cmd /c "npm run dev"
+  set "RUN_CMD=npm run dev"
 )
+powershell -NoProfile -WindowStyle Hidden -Command "Start-Process cmd -ArgumentList '/c %RUN_CMD% ^> \"%LOG_DIR%\dev-server.log\" 2^>^&1' -WorkingDirectory '%PROJECT_DIR%' -WindowStyle Hidden"
+
+
 
 REM Wait until the port is actually listening (up to ~60s), then open browser.
 echo Waiting for server on port %PORT% ...
