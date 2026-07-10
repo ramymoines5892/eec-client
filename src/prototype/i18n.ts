@@ -1,0 +1,295 @@
+// Minimal i18n for Prototype 01. No external dependency.
+import { usePrototypeStore, type Language } from "./store";
+import { useEffect } from "react";
+
+type Dict = Record<string, string>;
+
+const en: Dict = {
+  "app.name": "EEC Platform",
+  "app.tagline": "Enterprise Business Management",
+  "common.continue": "Continue",
+  "common.back": "Back",
+  "common.save": "Save & Continue",
+  "common.skip": "Skip for now",
+  "common.optional": "Optional",
+  "common.required": "Required",
+  "common.reset": "Reset Prototype Data",
+  "common.completeNow": "Complete Now",
+  "common.email": "Email",
+  "common.password": "Password",
+  "common.confirmPassword": "Confirm Password",
+  "common.fullName": "Full Name",
+  "common.country": "Country",
+  "common.city": "City",
+  "common.address": "Address",
+  "common.telephone": "Telephone",
+
+  "lang.title": "Choose your language",
+  "lang.subtitle": "You can switch anytime from the header.",
+  "lang.en": "English",
+  "lang.ar": "العربية",
+
+  "landing.title": "Welcome to EEC",
+  "landing.subtitle": "Set up your workspace as System Owner, or sign in to an existing account.",
+  "landing.setup": "Set up new workspace",
+  "landing.signin": "Sign in",
+
+  "auth.email.title": "System Owner Email",
+  "auth.email.hint": "We'll send a verification link to this address.",
+  "auth.email.send": "Send verification",
+  "auth.verifySent.title": "Verification email sent",
+  "auth.verifySent.body": "In this prototype, no real email is sent. Click below to simulate opening the link.",
+  "auth.verifySent.open": "Open verification link (simulated)",
+  "auth.verifyResult.title": "Email verified",
+  "auth.verifyResult.body": "Your email is verified. Create a password to continue.",
+  "auth.verifyResult.next": "Create password",
+  "auth.createPassword.title": "Create your password",
+  "auth.createPassword.hint": "Minimum 8 characters. This is a prototype — no real credential is stored.",
+  "auth.createPassword.submit": "Create password",
+  "auth.login.title": "Sign in",
+  "auth.login.submit": "Sign in",
+  "auth.login.forgot": "Forgot password?",
+  "auth.forgot.title": "Forgot password",
+  "auth.forgot.body": "Enter your email. This is simulated — no real email is sent.",
+  "auth.forgot.submit": "Send reset link",
+  "auth.reset.title": "Reset password",
+  "auth.reset.submit": "Reset password",
+
+  "wizard.welcome.title": "Set up your workspace",
+  "wizard.welcome.body": "You'll define company basics, main branch, financials, organization, and your System Owner profile.",
+  "wizard.welcome.start": "Start setup",
+  "wizard.progress": "Setup progress",
+  "wizard.step.company": "Company Details",
+  "wizard.step.branch": "Main Branch",
+  "wizard.step.financial": "Financial Basics",
+  "wizard.step.org": "Organization",
+  "wizard.step.employee": "Owner Profile",
+  "wizard.step.position": "Position Assignment",
+  "wizard.step.review": "Review",
+  "wizard.step.checklist": "Activation",
+
+  "company.title": "Company Details",
+  "company.legalName": "Company Legal Name",
+  "company.displayName": "Company Display Name",
+  "company.code": "Company Code",
+  "company.timeZone": "Default Time Zone",
+  "company.functionalCurrency": "Functional Currency",
+  "company.logo": "Company Logo",
+  "company.tax": "Tax Registration Number",
+  "company.cr": "Commercial Registration Number",
+
+  "branch.title": "Main Branch",
+  "branch.name": "Branch Name",
+  "branch.code": "Branch Code",
+  "branch.isMain": "Main Branch",
+
+  "financial.title": "Financial Basics",
+  "financial.functional": "Functional Currency (from Company Details)",
+  "financial.transaction": "Enabled Transaction Currencies",
+  "financial.note": "Exchange rates are out of scope for this prototype.",
+
+  "org.title": "Suggested Organization Structure",
+  "org.body": "Adopt, rename, remove, or add units. These become company-owned once activated.",
+  "org.add": "Add unit",
+
+  "employee.title": "System Owner Employee Profile",
+  "employee.code": "Employee Code",
+  "employee.primaryBranch": "Primary Branch",
+  "employee.orgUnit": "Organizational Unit",
+  "employee.jobTitle": "Job Title",
+  "employee.startDate": "Position Effective Start Date",
+
+  "position.title": "System Owner Position Assignment",
+  "position.body": "Confirm the initial position assignment for the System Owner.",
+  "position.assign": "Confirm assignment",
+
+  "review.title": "Review your setup",
+  "review.edit": "Edit",
+
+  "checklist.title": "Activation Readiness",
+  "checklist.email": "Owner Email Verified",
+  "checklist.password": "Password Created",
+  "checklist.company": "Company Information Complete",
+  "checklist.branch": "Main Branch Complete",
+  "checklist.employee": "System Owner Employee Profile Complete",
+  "checklist.position": "Active Primary Position Assignment Created",
+  "checklist.activate": "Activate Workspace",
+  "checklist.blocked": "Complete all items to activate",
+
+  "success.title": "Workspace activated",
+  "success.body": "Your workspace is ready. This is a prototype — no data was saved to a real database.",
+  "success.enter": "Enter dashboard",
+
+  "shell.dashboard": "Dashboard",
+  "shell.comingLater": "Coming Later",
+  "shell.nav.rfq": "RFQ",
+  "shell.nav.products": "Products",
+  "shell.nav.procurement": "Procurement",
+  "shell.nav.inventory": "Inventory",
+  "shell.nav.sales": "Sales",
+  "shell.nav.quality": "Quality",
+  "shell.nav.finance": "Finance",
+  "shell.userMenu": "Account",
+  "shell.signOut": "Sign out",
+  "shell.currentBranch": "Current branch",
+
+  "dashboard.empty.title": "Your dashboard is ready",
+  "dashboard.empty.body": "Operational modules will appear here as they are approved and built.",
+
+  "banner.prototype": "PROTOTYPE — no real data, no real authentication",
+};
+
+const ar: Dict = {
+  "app.name": "منصة EEC",
+  "app.tagline": "إدارة الأعمال المؤسسية",
+  "common.continue": "متابعة",
+  "common.back": "رجوع",
+  "common.save": "حفظ ومتابعة",
+  "common.skip": "تخطي الآن",
+  "common.optional": "اختياري",
+  "common.required": "مطلوب",
+  "common.reset": "إعادة تعيين بيانات النموذج",
+  "common.completeNow": "أكمل الآن",
+  "common.email": "البريد الإلكتروني",
+  "common.password": "كلمة المرور",
+  "common.confirmPassword": "تأكيد كلمة المرور",
+  "common.fullName": "الاسم الكامل",
+  "common.country": "الدولة",
+  "common.city": "المدينة",
+  "common.address": "العنوان",
+  "common.telephone": "الهاتف",
+
+  "lang.title": "اختر لغتك",
+  "lang.subtitle": "يمكنك التبديل في أي وقت من الأعلى.",
+  "lang.en": "English",
+  "lang.ar": "العربية",
+
+  "landing.title": "أهلاً بك في EEC",
+  "landing.subtitle": "قم بإعداد مساحة العمل كمالك للنظام أو سجّل الدخول لحساب موجود.",
+  "landing.setup": "إعداد مساحة عمل جديدة",
+  "landing.signin": "تسجيل الدخول",
+
+  "auth.email.title": "بريد مالك النظام",
+  "auth.email.hint": "سنرسل رابط تحقق إلى هذا العنوان.",
+  "auth.email.send": "إرسال رابط التحقق",
+  "auth.verifySent.title": "تم إرسال بريد التحقق",
+  "auth.verifySent.body": "في هذا النموذج لا يُرسل بريد فعلي. اضغط لمحاكاة فتح الرابط.",
+  "auth.verifySent.open": "فتح رابط التحقق (محاكاة)",
+  "auth.verifyResult.title": "تم التحقق من البريد",
+  "auth.verifyResult.body": "تم التحقق من بريدك. أنشئ كلمة مرور للمتابعة.",
+  "auth.verifyResult.next": "إنشاء كلمة المرور",
+  "auth.createPassword.title": "أنشئ كلمة المرور",
+  "auth.createPassword.hint": "حد أدنى 8 أحرف. هذا نموذج تجريبي — لا تُخزَّن بيانات فعلية.",
+  "auth.createPassword.submit": "إنشاء كلمة المرور",
+  "auth.login.title": "تسجيل الدخول",
+  "auth.login.submit": "دخول",
+  "auth.login.forgot": "نسيت كلمة المرور؟",
+  "auth.forgot.title": "استعادة كلمة المرور",
+  "auth.forgot.body": "أدخل بريدك. محاكاة فقط — لا يُرسل بريد فعلي.",
+  "auth.forgot.submit": "إرسال رابط الاستعادة",
+  "auth.reset.title": "إعادة تعيين كلمة المرور",
+  "auth.reset.submit": "إعادة التعيين",
+
+  "wizard.welcome.title": "إعداد مساحة العمل",
+  "wizard.welcome.body": "ستحدد بيانات الشركة، الفرع الرئيسي، الأساسيات المالية، الهيكل التنظيمي، وملف مالك النظام.",
+  "wizard.welcome.start": "ابدأ الإعداد",
+  "wizard.progress": "تقدم الإعداد",
+  "wizard.step.company": "بيانات الشركة",
+  "wizard.step.branch": "الفرع الرئيسي",
+  "wizard.step.financial": "الأساسيات المالية",
+  "wizard.step.org": "الهيكل التنظيمي",
+  "wizard.step.employee": "ملف المالك",
+  "wizard.step.position": "تعيين المنصب",
+  "wizard.step.review": "المراجعة",
+  "wizard.step.checklist": "التفعيل",
+
+  "company.title": "بيانات الشركة",
+  "company.legalName": "الاسم القانوني للشركة",
+  "company.displayName": "اسم العرض",
+  "company.code": "كود الشركة",
+  "company.timeZone": "المنطقة الزمنية الافتراضية",
+  "company.functionalCurrency": "العملة الوظيفية",
+  "company.logo": "شعار الشركة",
+  "company.tax": "الرقم الضريبي",
+  "company.cr": "السجل التجاري",
+
+  "branch.title": "الفرع الرئيسي",
+  "branch.name": "اسم الفرع",
+  "branch.code": "كود الفرع",
+  "branch.isMain": "فرع رئيسي",
+
+  "financial.title": "الأساسيات المالية",
+  "financial.functional": "العملة الوظيفية (من بيانات الشركة)",
+  "financial.transaction": "عملات المعاملات المفعّلة",
+  "financial.note": "أسعار الصرف خارج نطاق هذا النموذج.",
+
+  "org.title": "الهيكل التنظيمي المقترح",
+  "org.body": "اعتمد أو أعد تسمية أو أزل أو أضف وحدات. تصبح ملكاً للشركة بعد التفعيل.",
+  "org.add": "إضافة وحدة",
+
+  "employee.title": "ملف موظف مالك النظام",
+  "employee.code": "كود الموظف",
+  "employee.primaryBranch": "الفرع الأساسي",
+  "employee.orgUnit": "الوحدة التنظيمية",
+  "employee.jobTitle": "المسمى الوظيفي",
+  "employee.startDate": "تاريخ بدء المنصب",
+
+  "position.title": "تعيين منصب مالك النظام",
+  "position.body": "أكّد تعيين المنصب المبدئي لمالك النظام.",
+  "position.assign": "تأكيد التعيين",
+
+  "review.title": "مراجعة الإعداد",
+  "review.edit": "تعديل",
+
+  "checklist.title": "جاهزية التفعيل",
+  "checklist.email": "تم التحقق من بريد المالك",
+  "checklist.password": "تم إنشاء كلمة المرور",
+  "checklist.company": "بيانات الشركة مكتملة",
+  "checklist.branch": "الفرع الرئيسي مكتمل",
+  "checklist.employee": "ملف موظف مالك النظام مكتمل",
+  "checklist.position": "تم إنشاء تعيين منصب أساسي فعّال",
+  "checklist.activate": "تفعيل مساحة العمل",
+  "checklist.blocked": "أكمل كل البنود للتفعيل",
+
+  "success.title": "تم تفعيل مساحة العمل",
+  "success.body": "مساحة العمل جاهزة. هذا نموذج — لم يتم حفظ أي بيانات في قاعدة بيانات فعلية.",
+  "success.enter": "الدخول للوحة التحكم",
+
+  "shell.dashboard": "لوحة التحكم",
+  "shell.comingLater": "قريباً",
+  "shell.nav.rfq": "طلبات الأسعار",
+  "shell.nav.products": "المنتجات",
+  "shell.nav.procurement": "المشتريات",
+  "shell.nav.inventory": "المخزون",
+  "shell.nav.sales": "المبيعات",
+  "shell.nav.quality": "الجودة",
+  "shell.nav.finance": "المالية",
+  "shell.userMenu": "الحساب",
+  "shell.signOut": "تسجيل الخروج",
+  "shell.currentBranch": "الفرع الحالي",
+
+  "dashboard.empty.title": "لوحة التحكم جاهزة",
+  "dashboard.empty.body": "ستظهر الموديولات التشغيلية هنا عند اعتمادها وبناؤها.",
+
+  "banner.prototype": "نموذج تجريبي — لا بيانات حقيقية ولا مصادقة حقيقية",
+};
+
+const dicts: Record<Language, Dict> = { en, ar };
+
+export function useT() {
+  const lang = usePrototypeStore((s) => s.language);
+  return (key: string) => dicts[lang][key] ?? key;
+}
+
+export function useLang() {
+  return usePrototypeStore((s) => s.language);
+}
+
+export function useApplyDirection() {
+  const lang = useLang();
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  }, [lang]);
+}
