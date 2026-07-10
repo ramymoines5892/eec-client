@@ -12,7 +12,7 @@ REM Auto-detect: this script lives in <PROJECT_DIR>\scripts\windows\
 for %%I in ("%~dp0..\..") do set "PROJECT_DIR=%%~fI"
 set "BRANCH=main"
 set "PORT=8080"
-set "OPEN_URL=http://localhost:%PORT%/"
+set "OPEN_URL=http://localhost:%PORT%/language"
 set "LOG_DIR=%PROJECT_DIR%\.sync-logs"
 
 if not exist "%PROJECT_DIR%" (
@@ -71,14 +71,14 @@ for /f "tokens=5" %%a in ('netstat -ano ^| findstr :%PORT% ^| findstr LISTENING'
 timeout /t 2 /nobreak >nul
 
 
-echo ====== [4/4] Starting dev server (hidden) ======
+echo ====== [4/4] Starting dev server ======
 where bun >nul 2>&1
 if %errorlevel%==0 (
-  set "RUN_CMD=bun run dev"
+  set "RUN_CMD=bun run dev -- --host 127.0.0.1 --port %PORT% --strictPort"
 ) else (
-  set "RUN_CMD=npm run dev"
+  set "RUN_CMD=npm run dev -- --host 127.0.0.1 --port %PORT% --strictPort"
 )
-powershell -NoProfile -Command "Start-Process -FilePath 'cmd.exe' -ArgumentList '/c %RUN_CMD% > \"%LOG_DIR%\dev-server.log\" 2>&1' -WorkingDirectory '%PROJECT_DIR%' -WindowStyle Hidden"
+start "EEC Dev Server" powershell -NoExit -NoProfile -Command "Set-Location -LiteralPath '%PROJECT_DIR%'; %RUN_CMD% 2>&1 | Tee-Object -FilePath '%LOG_DIR%\dev-server.log'"
 
 
 
@@ -87,11 +87,11 @@ echo Waiting for server on port %PORT% ...
 set /a _tries=0
 :waitloop
 timeout /t 1 /nobreak >nul
-netstat -ano | findstr :%PORT% >nul
+netstat -ano | findstr :%PORT% | findstr LISTENING >nul
 if %errorlevel%==0 goto :ready
 set /a _tries+=1
 if %_tries% LSS 60 goto :waitloop
-echo [WARN] Server did not open port %PORT% within 60s. Check the "EEC Dev Server" window.
+echo [WARN] Server did not open port %PORT% within 60s. Check the "EEC Dev Server" window or %LOG_DIR%\dev-server.log.
 exit /b 1
 
 :ready
