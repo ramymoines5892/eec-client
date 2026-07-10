@@ -96,16 +96,26 @@ if %errorlevel%==0 (
 REM Create a tiny runner file first. This avoids PowerShell/CMD quote problems
 REM when the project path contains spaces, like: D:\eec code\eec-client
 set "SERVER_CMD=%LOG_DIR%\run-dev-server.cmd"
+set "SERVER_VBS=%LOG_DIR%\run-dev-server-hidden.vbs"
 (
   echo @echo off
   echo cd /d "%PROJECT_DIR%"
   echo %RUN_CMD% ^> "%LOG_DIR%\dev-server.log" 2^>^&1
 ) > "%SERVER_CMD%"
 
-REM Launch the dev server hidden in the background (no visible window).
-powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command ^
-  "$p=$env:SERVER_CMD; Start-Process -WindowStyle Hidden -FilePath 'cmd.exe' -ArgumentList @('/d','/c', ('""' + $p + '""'))"
+REM VBScript Run(..., 0, False) is the most reliable Windows way to launch
+REM a background process with no visible CMD/PowerShell window.
+(
+  echo Set WshShell = CreateObject("WScript.Shell"^)
+  echo WshShell.Run Chr(34^) ^& "%SERVER_CMD%" ^& Chr(34^), 0, False
+) > "%SERVER_VBS%"
 
+REM Launch the dev server hidden in the background (no visible window).
+cscript //nologo "%SERVER_VBS%" >> "%LOG%" 2>&1
+if errorlevel 1 (
+  echo [WARN] Hidden launch failed; trying minimized fallback...
+  start "EEC Dev Server" /min cmd /d /c ""%SERVER_CMD%""
+)
 
 
 REM Wait until the port is actually listening (up to ~60s), then open browser.
@@ -116,6 +126,8 @@ timeout /t 1 /nobreak >nul
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$c=New-Object Net.Sockets.TcpClient; try { $c.Connect('127.0.0.1', %PORT%); $c.Close(); exit 0 } catch { exit 1 }" >nul 2>&1
 if %errorlevel%==0 goto :ready
 if exist "%LOG_DIR%\dev-server.log" (
+  findstr /I /C:"Error:" /C:"EADDRINUSE" /C:"Failed" /C:"Cannot find module" /C:"not recognized" "%LOG_DIR%\dev-server.log" >nul 2>&1
+  if !errorlevel!==0 goto :server_failed
   findstr /C:"Local:" "%LOG_DIR%\dev-server.log" >nul 2>&1
   if !errorlevel!==0 goto :ready
 )
@@ -126,6 +138,12 @@ if exist "%LOG_DIR%\dev-server.log" (
   echo ====== Last dev-server log lines ======
   powershell -NoProfile -Command "Get-Content -LiteralPath '%LOG_DIR%\dev-server.log' -Tail 40"
 )
+pause
+exit /b 1
+
+:server_failed
+echo [ERROR] Dev server failed to start. Last log lines:
+powershell -NoProfile -Command "Get-Content -LiteralPath '%LOG_DIR%\dev-server.log' -Tail 60"
 pause
 exit /b 1
 
