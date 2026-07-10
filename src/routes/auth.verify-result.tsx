@@ -34,13 +34,13 @@ function VerifyResultPage() {
       setStatus("ok");
       // If password already set, go to wizard; otherwise send to create password
       setTimeout(() => {
-        nav({ to: credential === "SET" ? "/wizard" : "/auth/create-password" });
+        nav({ to: state.credential === "SET" ? "/wizard" : "/auth/create-password" });
       }, 900);
     })();
     return () => {
       cancelled = true;
     };
-  }, [markEmailVerified, nav, credential]);
+  }, [markEmailVerified, nav, state.credential]);
 
   if (status === "loading") {
     return (
