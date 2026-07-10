@@ -92,7 +92,9 @@ if %errorlevel%==0 (
 ) else (
   set "RUN_CMD=npm run dev -- --host 127.0.0.1 --port %PORT% --strictPort"
 )
-start "EEC Dev Server" powershell -NoExit -NoProfile -Command "Set-Location -LiteralPath '%PROJECT_DIR%'; %RUN_CMD% 2>&1 | Tee-Object -FilePath '%LOG_DIR%\dev-server.log'"
+REM Launch the dev server hidden in the background (no visible window).
+powershell -NoProfile -WindowStyle Hidden -Command ^
+  "Start-Process -WindowStyle Hidden -FilePath 'cmd.exe' -ArgumentList '/c cd /d \"%PROJECT_DIR%\" ^&^& %RUN_CMD% ^> \"%LOG_DIR%\dev-server.log\" 2^>^&1'"
 
 
 
