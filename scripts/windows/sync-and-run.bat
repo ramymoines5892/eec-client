@@ -41,6 +41,13 @@ if errorlevel 1 (
 )
 
 echo ====== [2/4] Checking dependencies ======
+if not exist "src\routes\language.tsx" (
+  echo [ERROR] This folder does not look like the EEC app: %PROJECT_DIR%
+  echo Make sure you are running this file from D:\eec code\eec-client\scripts\windows\sync-and-run.bat
+  pause
+  exit /b 1
+)
+
 set "NEED_INSTALL=0"
 if not exist "node_modules" set "NEED_INSTALL=1"
 git diff HEAD@{1} HEAD --name-only 2>nul | findstr /I "package.json bun.lockb package-lock.json" >nul && set "NEED_INSTALL=1"
@@ -70,6 +77,13 @@ for /f "tokens=5" %%a in ('netstat -ano ^| findstr :%PORT% ^| findstr LISTENING'
 )
 timeout /t 2 /nobreak >nul
 
+netstat -ano | findstr :%PORT% | findstr LISTENING >nul
+if %errorlevel%==0 (
+  echo [ERROR] Port %PORT% is still busy. Close any old CMD/PowerShell dev server windows, then run this file again.
+  pause
+  exit /b 1
+)
+
 
 echo ====== [4/4] Starting dev server ======
 where bun >nul 2>&1
@@ -95,6 +109,16 @@ echo [WARN] Server did not open port %PORT% within 60s. Check the "EEC Dev Serve
 exit /b 1
 
 :ready
+where curl >nul 2>&1
+if %errorlevel%==0 (
+  curl -L -s "%OPEN_URL%" | findstr /I "EEC منصة" >nul
+  if errorlevel 1 (
+    echo [WARN] Port %PORT% is open, but the page does not look like EEC.
+    echo Close any old dev server windows, then run this file again.
+    echo Log file: %LOG_DIR%\dev-server.log
+    pause
+  )
+)
 start "" "%OPEN_URL%"
 exit /b 0
 
