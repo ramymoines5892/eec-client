@@ -8,7 +8,8 @@ REM Usage: double-click, or run from CMD.
 REM Configure PROJECT_DIR below to your local clone path.
 REM ============================================================
 
-set "PROJECT_DIR=D:\eec code\build-vs.-plan-explained"
+REM Auto-detect: this script lives in <PROJECT_DIR>\scripts\windows\
+for %%I in ("%~dp0..\..") do set "PROJECT_DIR=%%~fI"
 set "BRANCH=main"
 set "PORT=8080"
 set "OPEN_URL=http://localhost:%PORT%/"
