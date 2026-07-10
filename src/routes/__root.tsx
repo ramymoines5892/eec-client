@@ -77,14 +77,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "EEC — Enterprise Business Management (Prototype 01)" },
+      { name: "description", content: "Prototype 01: setup wizard, mock auth, and application shell for the EEC industrial supply platform. No real backend." },
+      { property: "og:title", content: "EEC Prototype 01" },
+      { property: "og:description", content: "Visual and interaction prototype — no real data or authentication." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

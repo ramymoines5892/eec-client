@@ -9,9 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WizardRouteImport } from './routes/wizard'
 import { Route as SetupLandingRouteImport } from './routes/setup-landing'
 import { Route as LanguageRouteImport } from './routes/language'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WizardIndexRouteImport } from './routes/wizard.index'
+import { Route as WizardSuccessRouteImport } from './routes/wizard.success'
+import { Route as WizardReviewRouteImport } from './routes/wizard.review'
+import { Route as WizardPositionRouteImport } from './routes/wizard.position'
+import { Route as WizardOrgRouteImport } from './routes/wizard.org'
+import { Route as WizardFinancialRouteImport } from './routes/wizard.financial'
+import { Route as WizardEmployeeRouteImport } from './routes/wizard.employee'
+import { Route as WizardCompanyRouteImport } from './routes/wizard.company'
+import { Route as WizardChecklistRouteImport } from './routes/wizard.checklist'
+import { Route as WizardBranchRouteImport } from './routes/wizard.branch'
 import { Route as AuthVerifySentRouteImport } from './routes/auth.verify-sent'
 import { Route as AuthVerifyResultRouteImport } from './routes/auth.verify-result'
 import { Route as AuthResetRouteImport } from './routes/auth.reset'
@@ -19,7 +31,13 @@ import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthEmailRouteImport } from './routes/auth.email'
 import { Route as AuthCreatePasswordRouteImport } from './routes/auth.create-password'
+import { Route as AppDashboardRouteImport } from './routes/app.dashboard'
 
+const WizardRoute = WizardRouteImport.update({
+  id: '/wizard',
+  path: '/wizard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SetupLandingRoute = SetupLandingRouteImport.update({
   id: '/setup-landing',
   path: '/setup-landing',
@@ -30,10 +48,65 @@ const LanguageRoute = LanguageRouteImport.update({
   path: '/language',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const WizardIndexRoute = WizardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardSuccessRoute = WizardSuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardReviewRoute = WizardReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardPositionRoute = WizardPositionRouteImport.update({
+  id: '/position',
+  path: '/position',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardOrgRoute = WizardOrgRouteImport.update({
+  id: '/org',
+  path: '/org',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardFinancialRoute = WizardFinancialRouteImport.update({
+  id: '/financial',
+  path: '/financial',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardEmployeeRoute = WizardEmployeeRouteImport.update({
+  id: '/employee',
+  path: '/employee',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardCompanyRoute = WizardCompanyRouteImport.update({
+  id: '/company',
+  path: '/company',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardChecklistRoute = WizardChecklistRouteImport.update({
+  id: '/checklist',
+  path: '/checklist',
+  getParentRoute: () => WizardRoute,
+} as any)
+const WizardBranchRoute = WizardBranchRouteImport.update({
+  id: '/branch',
+  path: '/branch',
+  getParentRoute: () => WizardRoute,
 } as any)
 const AuthVerifySentRoute = AuthVerifySentRouteImport.update({
   id: '/auth/verify-sent',
@@ -70,11 +143,19 @@ const AuthCreatePasswordRoute = AuthCreatePasswordRouteImport.update({
   path: '/auth/create-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/language': typeof LanguageRoute
   '/setup-landing': typeof SetupLandingRoute
+  '/wizard': typeof WizardRouteWithChildren
+  '/app/dashboard': typeof AppDashboardRoute
   '/auth/create-password': typeof AuthCreatePasswordRoute
   '/auth/email': typeof AuthEmailRoute
   '/auth/forgot': typeof AuthForgotRoute
@@ -82,11 +163,23 @@ export interface FileRoutesByFullPath {
   '/auth/reset': typeof AuthResetRoute
   '/auth/verify-result': typeof AuthVerifyResultRoute
   '/auth/verify-sent': typeof AuthVerifySentRoute
+  '/wizard/branch': typeof WizardBranchRoute
+  '/wizard/checklist': typeof WizardChecklistRoute
+  '/wizard/company': typeof WizardCompanyRoute
+  '/wizard/employee': typeof WizardEmployeeRoute
+  '/wizard/financial': typeof WizardFinancialRoute
+  '/wizard/org': typeof WizardOrgRoute
+  '/wizard/position': typeof WizardPositionRoute
+  '/wizard/review': typeof WizardReviewRoute
+  '/wizard/success': typeof WizardSuccessRoute
+  '/wizard/': typeof WizardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/language': typeof LanguageRoute
   '/setup-landing': typeof SetupLandingRoute
+  '/app/dashboard': typeof AppDashboardRoute
   '/auth/create-password': typeof AuthCreatePasswordRoute
   '/auth/email': typeof AuthEmailRoute
   '/auth/forgot': typeof AuthForgotRoute
@@ -94,12 +187,25 @@ export interface FileRoutesByTo {
   '/auth/reset': typeof AuthResetRoute
   '/auth/verify-result': typeof AuthVerifyResultRoute
   '/auth/verify-sent': typeof AuthVerifySentRoute
+  '/wizard/branch': typeof WizardBranchRoute
+  '/wizard/checklist': typeof WizardChecklistRoute
+  '/wizard/company': typeof WizardCompanyRoute
+  '/wizard/employee': typeof WizardEmployeeRoute
+  '/wizard/financial': typeof WizardFinancialRoute
+  '/wizard/org': typeof WizardOrgRoute
+  '/wizard/position': typeof WizardPositionRoute
+  '/wizard/review': typeof WizardReviewRoute
+  '/wizard/success': typeof WizardSuccessRoute
+  '/wizard': typeof WizardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/language': typeof LanguageRoute
   '/setup-landing': typeof SetupLandingRoute
+  '/wizard': typeof WizardRouteWithChildren
+  '/app/dashboard': typeof AppDashboardRoute
   '/auth/create-password': typeof AuthCreatePasswordRoute
   '/auth/email': typeof AuthEmailRoute
   '/auth/forgot': typeof AuthForgotRoute
@@ -107,13 +213,26 @@ export interface FileRoutesById {
   '/auth/reset': typeof AuthResetRoute
   '/auth/verify-result': typeof AuthVerifyResultRoute
   '/auth/verify-sent': typeof AuthVerifySentRoute
+  '/wizard/branch': typeof WizardBranchRoute
+  '/wizard/checklist': typeof WizardChecklistRoute
+  '/wizard/company': typeof WizardCompanyRoute
+  '/wizard/employee': typeof WizardEmployeeRoute
+  '/wizard/financial': typeof WizardFinancialRoute
+  '/wizard/org': typeof WizardOrgRoute
+  '/wizard/position': typeof WizardPositionRoute
+  '/wizard/review': typeof WizardReviewRoute
+  '/wizard/success': typeof WizardSuccessRoute
+  '/wizard/': typeof WizardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/app'
     | '/language'
     | '/setup-landing'
+    | '/wizard'
+    | '/app/dashboard'
     | '/auth/create-password'
     | '/auth/email'
     | '/auth/forgot'
@@ -121,11 +240,23 @@ export interface FileRouteTypes {
     | '/auth/reset'
     | '/auth/verify-result'
     | '/auth/verify-sent'
+    | '/wizard/branch'
+    | '/wizard/checklist'
+    | '/wizard/company'
+    | '/wizard/employee'
+    | '/wizard/financial'
+    | '/wizard/org'
+    | '/wizard/position'
+    | '/wizard/review'
+    | '/wizard/success'
+    | '/wizard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/app'
     | '/language'
     | '/setup-landing'
+    | '/app/dashboard'
     | '/auth/create-password'
     | '/auth/email'
     | '/auth/forgot'
@@ -133,11 +264,24 @@ export interface FileRouteTypes {
     | '/auth/reset'
     | '/auth/verify-result'
     | '/auth/verify-sent'
+    | '/wizard/branch'
+    | '/wizard/checklist'
+    | '/wizard/company'
+    | '/wizard/employee'
+    | '/wizard/financial'
+    | '/wizard/org'
+    | '/wizard/position'
+    | '/wizard/review'
+    | '/wizard/success'
+    | '/wizard'
   id:
     | '__root__'
     | '/'
+    | '/app'
     | '/language'
     | '/setup-landing'
+    | '/wizard'
+    | '/app/dashboard'
     | '/auth/create-password'
     | '/auth/email'
     | '/auth/forgot'
@@ -145,12 +289,24 @@ export interface FileRouteTypes {
     | '/auth/reset'
     | '/auth/verify-result'
     | '/auth/verify-sent'
+    | '/wizard/branch'
+    | '/wizard/checklist'
+    | '/wizard/company'
+    | '/wizard/employee'
+    | '/wizard/financial'
+    | '/wizard/org'
+    | '/wizard/position'
+    | '/wizard/review'
+    | '/wizard/success'
+    | '/wizard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   LanguageRoute: typeof LanguageRoute
   SetupLandingRoute: typeof SetupLandingRoute
+  WizardRoute: typeof WizardRouteWithChildren
   AuthCreatePasswordRoute: typeof AuthCreatePasswordRoute
   AuthEmailRoute: typeof AuthEmailRoute
   AuthForgotRoute: typeof AuthForgotRoute
@@ -162,6 +318,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wizard': {
+      id: '/wizard'
+      path: '/wizard'
+      fullPath: '/wizard'
+      preLoaderRoute: typeof WizardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/setup-landing': {
       id: '/setup-landing'
       path: '/setup-landing'
@@ -176,12 +339,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LanguageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/wizard/': {
+      id: '/wizard/'
+      path: '/'
+      fullPath: '/wizard/'
+      preLoaderRoute: typeof WizardIndexRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/success': {
+      id: '/wizard/success'
+      path: '/success'
+      fullPath: '/wizard/success'
+      preLoaderRoute: typeof WizardSuccessRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/review': {
+      id: '/wizard/review'
+      path: '/review'
+      fullPath: '/wizard/review'
+      preLoaderRoute: typeof WizardReviewRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/position': {
+      id: '/wizard/position'
+      path: '/position'
+      fullPath: '/wizard/position'
+      preLoaderRoute: typeof WizardPositionRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/org': {
+      id: '/wizard/org'
+      path: '/org'
+      fullPath: '/wizard/org'
+      preLoaderRoute: typeof WizardOrgRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/financial': {
+      id: '/wizard/financial'
+      path: '/financial'
+      fullPath: '/wizard/financial'
+      preLoaderRoute: typeof WizardFinancialRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/employee': {
+      id: '/wizard/employee'
+      path: '/employee'
+      fullPath: '/wizard/employee'
+      preLoaderRoute: typeof WizardEmployeeRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/company': {
+      id: '/wizard/company'
+      path: '/company'
+      fullPath: '/wizard/company'
+      preLoaderRoute: typeof WizardCompanyRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/checklist': {
+      id: '/wizard/checklist'
+      path: '/checklist'
+      fullPath: '/wizard/checklist'
+      preLoaderRoute: typeof WizardChecklistRouteImport
+      parentRoute: typeof WizardRoute
+    }
+    '/wizard/branch': {
+      id: '/wizard/branch'
+      path: '/branch'
+      fullPath: '/wizard/branch'
+      preLoaderRoute: typeof WizardBranchRouteImport
+      parentRoute: typeof WizardRoute
     }
     '/auth/verify-sent': {
       id: '/auth/verify-sent'
@@ -232,13 +472,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthCreatePasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/dashboard': {
+      id: '/app/dashboard'
+      path: '/dashboard'
+      fullPath: '/app/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppDashboardRoute: typeof AppDashboardRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppDashboardRoute: AppDashboardRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface WizardRouteChildren {
+  WizardBranchRoute: typeof WizardBranchRoute
+  WizardChecklistRoute: typeof WizardChecklistRoute
+  WizardCompanyRoute: typeof WizardCompanyRoute
+  WizardEmployeeRoute: typeof WizardEmployeeRoute
+  WizardFinancialRoute: typeof WizardFinancialRoute
+  WizardOrgRoute: typeof WizardOrgRoute
+  WizardPositionRoute: typeof WizardPositionRoute
+  WizardReviewRoute: typeof WizardReviewRoute
+  WizardSuccessRoute: typeof WizardSuccessRoute
+  WizardIndexRoute: typeof WizardIndexRoute
+}
+
+const WizardRouteChildren: WizardRouteChildren = {
+  WizardBranchRoute: WizardBranchRoute,
+  WizardChecklistRoute: WizardChecklistRoute,
+  WizardCompanyRoute: WizardCompanyRoute,
+  WizardEmployeeRoute: WizardEmployeeRoute,
+  WizardFinancialRoute: WizardFinancialRoute,
+  WizardOrgRoute: WizardOrgRoute,
+  WizardPositionRoute: WizardPositionRoute,
+  WizardReviewRoute: WizardReviewRoute,
+  WizardSuccessRoute: WizardSuccessRoute,
+  WizardIndexRoute: WizardIndexRoute,
+}
+
+const WizardRouteWithChildren =
+  WizardRoute._addFileChildren(WizardRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   LanguageRoute: LanguageRoute,
   SetupLandingRoute: SetupLandingRoute,
+  WizardRoute: WizardRouteWithChildren,
   AuthCreatePasswordRoute: AuthCreatePasswordRoute,
   AuthEmailRoute: AuthEmailRoute,
   AuthForgotRoute: AuthForgotRoute,
