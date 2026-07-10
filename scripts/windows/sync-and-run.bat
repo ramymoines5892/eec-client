@@ -92,9 +92,19 @@ if %errorlevel%==0 (
 ) else (
   set "RUN_CMD=npm run dev -- --host 127.0.0.1 --port %PORT% --strictPort"
 )
+
+REM Create a tiny runner file first. This avoids PowerShell/CMD quote problems
+REM when the project path contains spaces, like: D:\eec code\eec-client
+set "SERVER_CMD=%LOG_DIR%\run-dev-server.cmd"
+(
+  echo @echo off
+  echo cd /d "%PROJECT_DIR%"
+  echo %RUN_CMD% ^> "%LOG_DIR%\dev-server.log" 2^>^&1
+) > "%SERVER_CMD%"
+
 REM Launch the dev server hidden in the background (no visible window).
-powershell -NoProfile -WindowStyle Hidden -Command ^
-  "Start-Process -WindowStyle Hidden -FilePath 'cmd.exe' -ArgumentList '/c cd /d \"%PROJECT_DIR%\" ^&^& %RUN_CMD% ^> \"%LOG_DIR%\dev-server.log\" 2^>^&1'"
+powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command ^
+  "$p=$env:SERVER_CMD; Start-Process -WindowStyle Hidden -FilePath 'cmd.exe' -ArgumentList @('/d','/c', ('""' + $p + '""'))"
 
 
 
@@ -108,6 +118,11 @@ if %errorlevel%==0 goto :ready
 set /a _tries+=1
 if %_tries% LSS 60 goto :waitloop
 echo [WARN] Server did not open port %PORT% within 60s. Check the "EEC Dev Server" window or %LOG_DIR%\dev-server.log.
+if exist "%LOG_DIR%\dev-server.log" (
+  echo ====== Last dev-server log lines ======
+  powershell -NoProfile -Command "Get-Content -LiteralPath '%LOG_DIR%\dev-server.log' -Tail 40"
+)
+pause
 exit /b 1
 
 :ready
