@@ -72,17 +72,14 @@ if %errorlevel%==0 (
 )
 
 echo ====== [4/4] Starting dev server (hidden) ======
-set "VBS=%TEMP%\eec-run-hidden.vbs"
 where bun >nul 2>&1
 if %errorlevel%==0 (
   set "RUN_CMD=bun run dev"
 ) else (
   set "RUN_CMD=npm run dev"
 )
-> "%VBS%" echo Set WshShell = CreateObject("WScript.Shell")
->> "%VBS%" echo WshShell.CurrentDirectory = "%PROJECT_DIR%"
->> "%VBS%" echo WshShell.Run "cmd /c " ^& Chr(34) ^& "%RUN_CMD% ^> """"%LOG_DIR%\dev-server.log"""" 2^>^&1" ^& Chr(34), 0, False
-wscript "%VBS%"
+powershell -NoProfile -WindowStyle Hidden -Command "Start-Process cmd -ArgumentList '/c %RUN_CMD% ^> \"%LOG_DIR%\dev-server.log\" 2^>^&1' -WorkingDirectory '%PROJECT_DIR%' -WindowStyle Hidden"
+
 
 
 REM Wait until the port is actually listening (up to ~60s), then open browser.
