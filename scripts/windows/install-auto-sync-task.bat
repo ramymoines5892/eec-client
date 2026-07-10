@@ -21,11 +21,23 @@ schtasks /Create /F ^
   /TR "\"%SCRIPT%\" pull-only" ^
   /RL HIGHEST
 
+if not %errorlevel%==0 (
+  echo [ERROR] Failed to create scheduled task. Run this file as Administrator.
+  pause
+  exit /b 1
+)
+
+echo Enabling "Run as soon as possible after a missed start" ...
+powershell -NoProfile -Command ^
+  "$s = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Hours 1);" ^
+  "Set-ScheduledTask -TaskName '%TASK_NAME%' -Settings $s | Out-Null"
+
 if %errorlevel%==0 (
-  echo [OK] Task created. It will run every 3 days at 09:00.
+  echo [OK] Task created. Runs every 3 days at 09:00.
+  echo      If the PC was off/asleep, it will run automatically the next time it is on.
   echo Manage it in Task Scheduler under name: %TASK_NAME%
 ) else (
-  echo [ERROR] Failed to create scheduled task. Run this file as Administrator.
+  echo [WARN] Task created but could not enable "StartWhenAvailable". Run as Administrator.
 )
 
 pause
