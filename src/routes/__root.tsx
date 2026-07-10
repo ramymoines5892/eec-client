@@ -8,6 +8,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { Toaster } from "sonner";
+import { usePrototypeStore } from "@/prototype/store";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -77,10 +79,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EEC — Enterprise Business Management (Prototype 01)" },
-      { name: "description", content: "Prototype 01: setup wizard, mock auth, and application shell for the EEC industrial supply platform. No real backend." },
-      { property: "og:title", content: "EEC Prototype 01" },
-      { property: "og:description", content: "Visual and interaction prototype — no real data or authentication." },
+      { title: "EEC — Enterprise Business Management" },
+      { name: "description", content: "EEC industrial supply platform: workspace setup, secure sign-in, and business management." },
+      { property: "og:title", content: "EEC — Enterprise Business Management" },
+      { property: "og:description", content: "Secure workspace setup and business management for industrial supply." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -114,11 +116,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const setLanguage = usePrototypeStore((s) => s.setLanguage);
+
+  useEffect(() => {
+    // Detect browser language once on mount (only if user hasn't chosen yet)
+    const stored = localStorage.getItem("eec_prototype_v1");
+    if (!stored) {
+      const nav = navigator.language?.toLowerCase() ?? "en";
+      setLanguage(nav.startsWith("ar") ? "ar" : "en");
+    }
+  }, [setLanguage]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Toaster richColors position="top-center" closeButton />
     </QueryClientProvider>
   );
 }
