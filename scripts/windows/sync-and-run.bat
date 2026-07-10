@@ -78,7 +78,7 @@ if %errorlevel%==0 (
 ) else (
   set "RUN_CMD=npm run dev"
 )
-powershell -NoProfile -WindowStyle Hidden -Command "Start-Process cmd -ArgumentList '/c %RUN_CMD% ^> \"%LOG_DIR%\dev-server.log\" 2^>^&1' -WorkingDirectory '%PROJECT_DIR%' -WindowStyle Hidden"
+powershell -NoProfile -Command "Start-Process -FilePath 'cmd.exe' -ArgumentList '/c %RUN_CMD% > \"%LOG_DIR%\dev-server.log\" 2>&1' -WorkingDirectory '%PROJECT_DIR%' -WindowStyle Hidden"
 
 
 
