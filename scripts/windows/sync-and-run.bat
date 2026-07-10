@@ -74,13 +74,25 @@ if %errorlevel%==0 (
 echo ====== [4/4] Starting dev server in background ======
 where bun >nul 2>&1
 if %errorlevel%==0 (
-  start "EEC Dev Server" /MIN cmd /c "cd /d "%PROJECT_DIR%" && bun run dev"
+  start "EEC Dev Server" /D "%PROJECT_DIR%" /MIN cmd /c "bun run dev"
 ) else (
-  start "EEC Dev Server" /MIN cmd /c "cd /d "%PROJECT_DIR%" && npm run dev"
+  start "EEC Dev Server" /D "%PROJECT_DIR%" /MIN cmd /c "npm run dev"
 )
 
-REM Give the server a few seconds to boot, then open the browser and exit.
-timeout /t 5 /nobreak >nul
+REM Wait until the port is actually listening (up to ~60s), then open browser.
+echo Waiting for server on port %PORT% ...
+set /a _tries=0
+:waitloop
+timeout /t 1 /nobreak >nul
+netstat -ano | findstr :%PORT% >nul
+if %errorlevel%==0 goto :ready
+set /a _tries+=1
+if %_tries% LSS 60 goto :waitloop
+echo [WARN] Server did not open port %PORT% within 60s. Check the "EEC Dev Server" window.
+exit /b 1
+
+:ready
 start "" "%OPEN_URL%"
 exit /b 0
+
 
