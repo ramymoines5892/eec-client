@@ -46,6 +46,7 @@ import { Route as AuthenticatedAdminMasterDataIndexRouteImport } from './routes/
 import { Route as AuthenticatedAdminLanguagesIndexRouteImport } from './routes/_authenticated/admin.languages.index'
 import { Route as AuthenticatedAdminBusinessPartnersIndexRouteImport } from './routes/_authenticated/admin.business-partners.index'
 import { Route as AuthenticatedAdminReferenceDataSourceIdRouteImport } from './routes/_authenticated/admin.reference-data.$sourceId'
+import { Route as AuthenticatedAdminOrganizationDepartmentsRouteImport } from './routes/_authenticated/admin.organization.departments'
 import { Route as AuthenticatedAdminOrganizationCompaniesRouteImport } from './routes/_authenticated/admin.organization.companies'
 import { Route as AuthenticatedAdminOrganizationBranchesRouteImport } from './routes/_authenticated/admin.organization.branches'
 
@@ -244,6 +245,12 @@ const AuthenticatedAdminReferenceDataSourceIdRoute =
     path: '/reference-data/$sourceId',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminOrganizationDepartmentsRoute =
+  AuthenticatedAdminOrganizationDepartmentsRouteImport.update({
+    id: '/organization/departments',
+    path: '/organization/departments',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminOrganizationCompaniesRoute =
   AuthenticatedAdminOrganizationCompaniesRouteImport.update({
     id: '/organization/companies',
@@ -285,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
+  '/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
@@ -323,6 +331,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
+  '/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages': typeof AuthenticatedAdminLanguagesIndexRoute
@@ -365,6 +374,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/_authenticated/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
+  '/_authenticated/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
   '/_authenticated/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/_authenticated/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/_authenticated/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
@@ -407,6 +417,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/admin/organization/branches'
     | '/admin/organization/companies'
+    | '/admin/organization/departments'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners/'
     | '/admin/languages/'
@@ -445,6 +456,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/admin/organization/branches'
     | '/admin/organization/companies'
+    | '/admin/organization/departments'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners'
     | '/admin/languages'
@@ -486,6 +498,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/'
     | '/_authenticated/admin/organization/branches'
     | '/_authenticated/admin/organization/companies'
+    | '/_authenticated/admin/organization/departments'
     | '/_authenticated/admin/reference-data/$sourceId'
     | '/_authenticated/admin/business-partners/'
     | '/_authenticated/admin/languages/'
@@ -776,6 +789,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminReferenceDataSourceIdRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/organization/departments': {
+      id: '/_authenticated/admin/organization/departments'
+      path: '/organization/departments'
+      fullPath: '/admin/organization/departments'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationDepartmentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/organization/companies': {
       id: '/_authenticated/admin/organization/companies'
       path: '/organization/companies'
@@ -797,6 +817,7 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAdminOrganizationBranchesRoute: typeof AuthenticatedAdminOrganizationBranchesRoute
   AuthenticatedAdminOrganizationCompaniesRoute: typeof AuthenticatedAdminOrganizationCompaniesRoute
+  AuthenticatedAdminOrganizationDepartmentsRoute: typeof AuthenticatedAdminOrganizationDepartmentsRoute
   AuthenticatedAdminReferenceDataSourceIdRoute: typeof AuthenticatedAdminReferenceDataSourceIdRoute
   AuthenticatedAdminBusinessPartnersIndexRoute: typeof AuthenticatedAdminBusinessPartnersIndexRoute
   AuthenticatedAdminLanguagesIndexRoute: typeof AuthenticatedAdminLanguagesIndexRoute
@@ -816,6 +837,8 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
     AuthenticatedAdminOrganizationBranchesRoute,
   AuthenticatedAdminOrganizationCompaniesRoute:
     AuthenticatedAdminOrganizationCompaniesRoute,
+  AuthenticatedAdminOrganizationDepartmentsRoute:
+    AuthenticatedAdminOrganizationDepartmentsRoute,
   AuthenticatedAdminReferenceDataSourceIdRoute:
     AuthenticatedAdminReferenceDataSourceIdRoute,
   AuthenticatedAdminBusinessPartnersIndexRoute:
