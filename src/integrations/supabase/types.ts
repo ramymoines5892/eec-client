@@ -61,6 +61,98 @@ export type Database = {
           },
         ]
       }
+      business_partner_roles: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          metadata: Json
+          partner_id: string
+          role: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          metadata?: Json
+          partner_id: string
+          role: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          metadata?: Json
+          partner_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_partner_roles_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "business_partners"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      business_partners: {
+        Row: {
+          address: string | null
+          city: string | null
+          code: string
+          country_code: string | null
+          created_at: string
+          email: string | null
+          id: string
+          legal_name: string
+          legal_name_ar: string | null
+          phone: string | null
+          registration_number: string | null
+          status: string
+          tax_number: string | null
+          trade_name: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          code: string
+          country_code?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          legal_name: string
+          legal_name_ar?: string | null
+          phone?: string | null
+          registration_number?: string | null
+          status?: string
+          tax_number?: string | null
+          trade_name?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          code?: string
+          country_code?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          legal_name?: string
+          legal_name_ar?: string | null
+          phone?: string | null
+          registration_number?: string | null
+          status?: string
+          tax_number?: string | null
+          trade_name?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       companies: {
         Row: {
           address: string | null

@@ -272,6 +272,24 @@ const en: Dict = {
   "admin.err.code": "Code is required",
   "admin.err.company": "Company is required",
   "admin.err.employeeNo": "Employee number is required",
+
+  "admin.bp.legalName": "Legal Name",
+  "admin.bp.legalNameAr": "Legal Name (Arabic)",
+  "admin.bp.tradeName": "Trade Name",
+  "admin.bp.taxNo": "Tax Number",
+  "admin.bp.regNo": "Registration No.",
+  "admin.bp.roles": "Roles",
+  "admin.bp.rolesHint": "A partner can play multiple roles. Toggle roles on or off — historical data stays intact.",
+  "admin.bp.manageRoles": "Manage roles",
+  "admin.bp.err.legal": "Legal name is required",
+  "admin.bp.role.customer": "Customer",
+  "admin.bp.role.vendor": "Vendor",
+  "admin.bp.role.manufacturer": "Manufacturer",
+  "admin.bp.role.agent": "Agent",
+  "admin.bp.role.carrier": "Carrier",
+  "admin.bp.role.insurance": "Insurance",
+  "admin.bp.role.bank": "Bank",
+  "admin.bp.role.government": "Government",
 };
 
 const ar: Dict = {
@@ -542,6 +560,24 @@ const ar: Dict = {
   "admin.err.code": "الرمز مطلوب",
   "admin.err.company": "الشركة مطلوبة",
   "admin.err.employeeNo": "رقم الموظف مطلوب",
+
+  "admin.bp.legalName": "الاسم القانوني",
+  "admin.bp.legalNameAr": "الاسم القانوني (عربي)",
+  "admin.bp.tradeName": "الاسم التجاري",
+  "admin.bp.taxNo": "الرقم الضريبي",
+  "admin.bp.regNo": "رقم السجل",
+  "admin.bp.roles": "الأدوار",
+  "admin.bp.rolesHint": "يمكن للشريك أن يلعب أدوارًا متعددة. فعّل أو عطّل الأدوار — تبقى البيانات التاريخية سليمة.",
+  "admin.bp.manageRoles": "إدارة الأدوار",
+  "admin.bp.err.legal": "الاسم القانوني مطلوب",
+  "admin.bp.role.customer": "عميل",
+  "admin.bp.role.vendor": "مورد",
+  "admin.bp.role.manufacturer": "مُصنّع",
+  "admin.bp.role.agent": "وكيل",
+  "admin.bp.role.carrier": "ناقل",
+  "admin.bp.role.insurance": "تأمين",
+  "admin.bp.role.bank": "بنك",
+  "admin.bp.role.government": "جهة حكومية",
 };
 
 const dicts: Record<Language, Dict> = { en, ar };
