@@ -13,6 +13,7 @@ import { Route as WizardRouteImport } from './routes/wizard'
 import { Route as SetupLandingRouteImport } from './routes/setup-landing'
 import { Route as LanguageRouteImport } from './routes/language'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WizardIndexRouteImport } from './routes/wizard.index'
 import { Route as WizardSuccessRouteImport } from './routes/wizard.success'
@@ -32,6 +33,8 @@ import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuthEmailRouteImport } from './routes/auth.email'
 import { Route as AuthCreatePasswordRouteImport } from './routes/auth.create-password'
 import { Route as AppDashboardRouteImport } from './routes/app.dashboard'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 
 const WizardRoute = WizardRouteImport.update({
   id: '/wizard',
@@ -51,6 +54,10 @@ const LanguageRoute = LanguageRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -148,6 +155,16 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -155,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/language': typeof LanguageRoute
   '/setup-landing': typeof SetupLandingRoute
   '/wizard': typeof WizardRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/app/dashboard': typeof AppDashboardRoute
   '/auth/create-password': typeof AuthCreatePasswordRoute
   '/auth/email': typeof AuthEmailRoute
@@ -173,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/wizard/review': typeof WizardReviewRoute
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -197,14 +216,17 @@ export interface FileRoutesByTo {
   '/wizard/review': typeof WizardReviewRoute
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard': typeof WizardIndexRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/app': typeof AppRouteWithChildren
   '/language': typeof LanguageRoute
   '/setup-landing': typeof SetupLandingRoute
   '/wizard': typeof WizardRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/app/dashboard': typeof AppDashboardRoute
   '/auth/create-password': typeof AuthCreatePasswordRoute
   '/auth/email': typeof AuthEmailRoute
@@ -223,6 +245,7 @@ export interface FileRoutesById {
   '/wizard/review': typeof WizardReviewRoute
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -232,6 +255,7 @@ export interface FileRouteTypes {
     | '/language'
     | '/setup-landing'
     | '/wizard'
+    | '/admin'
     | '/app/dashboard'
     | '/auth/create-password'
     | '/auth/email'
@@ -250,6 +274,7 @@ export interface FileRouteTypes {
     | '/wizard/review'
     | '/wizard/success'
     | '/wizard/'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -274,13 +299,16 @@ export interface FileRouteTypes {
     | '/wizard/review'
     | '/wizard/success'
     | '/wizard'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/app'
     | '/language'
     | '/setup-landing'
     | '/wizard'
+    | '/_authenticated/admin'
     | '/app/dashboard'
     | '/auth/create-password'
     | '/auth/email'
@@ -299,10 +327,12 @@ export interface FileRouteTypes {
     | '/wizard/review'
     | '/wizard/success'
     | '/wizard/'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AppRoute: typeof AppRouteWithChildren
   LanguageRoute: typeof LanguageRoute
   SetupLandingRoute: typeof SetupLandingRoute
@@ -344,6 +374,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -479,8 +516,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
+
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
@@ -523,6 +596,7 @@ const WizardRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AppRoute: AppRouteWithChildren,
   LanguageRoute: LanguageRoute,
   SetupLandingRoute: SetupLandingRoute,
