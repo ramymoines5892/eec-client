@@ -6,8 +6,10 @@ import { useT } from "@/prototype/i18n";
 import { usePrototypeStore } from "@/prototype/store";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useState } from "react";
-import { Mail, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Mail, Loader2, Clock } from "lucide-react";
+
+const OTP_TTL_SECONDS = 300; // 5 minutes
 
 export const Route = createFileRoute("/auth/verify-sent")({
   component: VerifySentPage,
@@ -22,6 +24,18 @@ function VerifySentPage() {
   const [code, setCode] = useState("");
   const [resending, setResending] = useState(false);
   const [verifying, setVerifying] = useState(false);
+  const [expiresAt, setExpiresAt] = useState<number>(() => Date.now() + OTP_TTL_SECONDS * 1000);
+  const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const remaining = Math.max(0, Math.floor((expiresAt - now) / 1000));
+  const expired = remaining === 0;
+  const mm = String(Math.floor(remaining / 60)).padStart(2, "0");
+  const ss = String(remaining % 60).padStart(2, "0");
 
   const resend = async () => {
     if (!email) return;
