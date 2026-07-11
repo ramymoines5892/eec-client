@@ -315,6 +315,20 @@ const en: Dict = {
   "admin.sec.noRoles": "No roles assigned",
   "admin.sec.addRole": "Add role...",
   "admin.actions.add": "Add",
+  "admin.sys.key": "Key",
+  "admin.sys.value": "Value",
+  "admin.sys.global": "Global (all companies)",
+  "admin.sys.companyHint": "Leave empty for a global setting that applies to all companies.",
+  "admin.sys.err.key": "Key is required",
+  "admin.lang.nameEn": "English Name",
+  "admin.lang.nameNative": "Native Name",
+  "admin.lang.rtl": "Right-to-left",
+  "admin.lang.sort": "Order",
+  "admin.tmpl.entity": "Entity Type",
+  "admin.tmpl.fields": "Fields",
+  "admin.tmpl.fieldsHint": "JSON array of field definitions: key, label, type, required. Consumed by dynamic forms.",
+  "admin.tmpl.err.entity": "Entity type is required",
+  "admin.tmpl.err.json": "Fields must be a valid JSON array",
 };
 
 const ar: Dict = {
