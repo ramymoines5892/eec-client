@@ -46,6 +46,11 @@ import { Route as AuthenticatedAdminMasterDataIndexRouteImport } from './routes/
 import { Route as AuthenticatedAdminLanguagesIndexRouteImport } from './routes/_authenticated/admin.languages.index'
 import { Route as AuthenticatedAdminBusinessPartnersIndexRouteImport } from './routes/_authenticated/admin.business-partners.index'
 import { Route as AuthenticatedAdminReferenceDataSourceIdRouteImport } from './routes/_authenticated/admin.reference-data.$sourceId'
+import { Route as AuthenticatedAdminOrganizationJobTitlesRouteImport } from './routes/_authenticated/admin.organization.job-titles'
+import { Route as AuthenticatedAdminOrganizationEmployeesRouteImport } from './routes/_authenticated/admin.organization.employees'
+import { Route as AuthenticatedAdminOrganizationDepartmentsRouteImport } from './routes/_authenticated/admin.organization.departments'
+import { Route as AuthenticatedAdminOrganizationCompaniesRouteImport } from './routes/_authenticated/admin.organization.companies'
+import { Route as AuthenticatedAdminOrganizationBranchesRouteImport } from './routes/_authenticated/admin.organization.branches'
 
 const WizardRoute = WizardRouteImport.update({
   id: '/wizard',
@@ -242,6 +247,36 @@ const AuthenticatedAdminReferenceDataSourceIdRoute =
     path: '/reference-data/$sourceId',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminOrganizationJobTitlesRoute =
+  AuthenticatedAdminOrganizationJobTitlesRouteImport.update({
+    id: '/organization/job-titles',
+    path: '/organization/job-titles',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminOrganizationEmployeesRoute =
+  AuthenticatedAdminOrganizationEmployeesRouteImport.update({
+    id: '/organization/employees',
+    path: '/organization/employees',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminOrganizationDepartmentsRoute =
+  AuthenticatedAdminOrganizationDepartmentsRouteImport.update({
+    id: '/organization/departments',
+    path: '/organization/departments',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminOrganizationCompaniesRoute =
+  AuthenticatedAdminOrganizationCompaniesRouteImport.update({
+    id: '/organization/companies',
+    path: '/organization/companies',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminOrganizationBranchesRoute =
+  AuthenticatedAdminOrganizationBranchesRouteImport.update({
+    id: '/organization/branches',
+    path: '/organization/branches',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -269,6 +304,11 @@ export interface FileRoutesByFullPath {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
+  '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
+  '/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  '/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
+  '/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
@@ -305,6 +345,11 @@ export interface FileRoutesByTo {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard': typeof WizardIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
+  '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
+  '/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  '/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
+  '/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages': typeof AuthenticatedAdminLanguagesIndexRoute
@@ -345,6 +390,11 @@ export interface FileRoutesById {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
+  '/_authenticated/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
+  '/_authenticated/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  '/_authenticated/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
+  '/_authenticated/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/_authenticated/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/_authenticated/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/_authenticated/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
@@ -385,6 +435,11 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/admin/'
+    | '/admin/organization/branches'
+    | '/admin/organization/companies'
+    | '/admin/organization/departments'
+    | '/admin/organization/employees'
+    | '/admin/organization/job-titles'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners/'
     | '/admin/languages/'
@@ -421,6 +476,11 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard'
     | '/admin'
+    | '/admin/organization/branches'
+    | '/admin/organization/companies'
+    | '/admin/organization/departments'
+    | '/admin/organization/employees'
+    | '/admin/organization/job-titles'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners'
     | '/admin/languages'
@@ -460,6 +520,11 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/organization/branches'
+    | '/_authenticated/admin/organization/companies'
+    | '/_authenticated/admin/organization/departments'
+    | '/_authenticated/admin/organization/employees'
+    | '/_authenticated/admin/organization/job-titles'
     | '/_authenticated/admin/reference-data/$sourceId'
     | '/_authenticated/admin/business-partners/'
     | '/_authenticated/admin/languages/'
@@ -750,11 +815,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminReferenceDataSourceIdRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/organization/job-titles': {
+      id: '/_authenticated/admin/organization/job-titles'
+      path: '/organization/job-titles'
+      fullPath: '/admin/organization/job-titles'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationJobTitlesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/organization/employees': {
+      id: '/_authenticated/admin/organization/employees'
+      path: '/organization/employees'
+      fullPath: '/admin/organization/employees'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationEmployeesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/organization/departments': {
+      id: '/_authenticated/admin/organization/departments'
+      path: '/organization/departments'
+      fullPath: '/admin/organization/departments'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationDepartmentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/organization/companies': {
+      id: '/_authenticated/admin/organization/companies'
+      path: '/organization/companies'
+      fullPath: '/admin/organization/companies'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationCompaniesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/organization/branches': {
+      id: '/_authenticated/admin/organization/branches'
+      path: '/organization/branches'
+      fullPath: '/admin/organization/branches'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationBranchesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminOrganizationBranchesRoute: typeof AuthenticatedAdminOrganizationBranchesRoute
+  AuthenticatedAdminOrganizationCompaniesRoute: typeof AuthenticatedAdminOrganizationCompaniesRoute
+  AuthenticatedAdminOrganizationDepartmentsRoute: typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  AuthenticatedAdminOrganizationEmployeesRoute: typeof AuthenticatedAdminOrganizationEmployeesRoute
+  AuthenticatedAdminOrganizationJobTitlesRoute: typeof AuthenticatedAdminOrganizationJobTitlesRoute
   AuthenticatedAdminReferenceDataSourceIdRoute: typeof AuthenticatedAdminReferenceDataSourceIdRoute
   AuthenticatedAdminBusinessPartnersIndexRoute: typeof AuthenticatedAdminBusinessPartnersIndexRoute
   AuthenticatedAdminLanguagesIndexRoute: typeof AuthenticatedAdminLanguagesIndexRoute
@@ -770,6 +875,16 @@ interface AuthenticatedAdminRouteChildren {
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminOrganizationBranchesRoute:
+    AuthenticatedAdminOrganizationBranchesRoute,
+  AuthenticatedAdminOrganizationCompaniesRoute:
+    AuthenticatedAdminOrganizationCompaniesRoute,
+  AuthenticatedAdminOrganizationDepartmentsRoute:
+    AuthenticatedAdminOrganizationDepartmentsRoute,
+  AuthenticatedAdminOrganizationEmployeesRoute:
+    AuthenticatedAdminOrganizationEmployeesRoute,
+  AuthenticatedAdminOrganizationJobTitlesRoute:
+    AuthenticatedAdminOrganizationJobTitlesRoute,
   AuthenticatedAdminReferenceDataSourceIdRoute:
     AuthenticatedAdminReferenceDataSourceIdRoute,
   AuthenticatedAdminBusinessPartnersIndexRoute:
