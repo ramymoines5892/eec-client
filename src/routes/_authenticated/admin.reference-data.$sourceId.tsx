@@ -174,12 +174,12 @@ function SourceValues() {
 
       <ConfirmationDialog
         open={!!deleting}
-        onOpenChange={(v) => !v && setDeleting(null)}
+        onOpenChange={(v) => { if (!v) setDeleting(null); }}
         title={t("admin.ref.delete.title")}
-        body={t("admin.ref.delete.body")}
+        description={t("admin.ref.delete.body")}
         confirmLabel={t("admin.actions.delete")}
         destructive
-        onConfirm={() => deleting && deleteMutation.mutate(deleting.id)}
+        onConfirm={() => { if (deleting) deleteMutation.mutate(deleting.id); }}
       />
     </div>
   );
