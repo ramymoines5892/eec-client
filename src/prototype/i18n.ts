@@ -520,6 +520,28 @@ const ar: Dict = {
   "admin.ref.value.empty": "لا توجد قيم بعد. أضف أول قيمة للبدء.",
   "admin.ref.delete.title": "حذف القيمة؟",
   "admin.ref.delete.body": "سيتم حذف هذه القيمة نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+
+  "admin.org.companies": "الشركات",
+  "admin.org.companies.desc": "الكيانات القانونية والمؤسسات.",
+  "admin.org.branches": "الفروع",
+  "admin.org.branches.desc": "المواقع الفعلية لكل شركة.",
+  "admin.org.departments": "الأقسام",
+  "admin.org.departments.desc": "الأقسام والوحدات التنظيمية.",
+  "admin.org.jobTitles": "المسميات الوظيفية",
+  "admin.org.jobTitles.desc": "تعريفات المسميات الوظيفية القابلة لإعادة الاستخدام.",
+  "admin.org.employees": "الموظفون",
+  "admin.org.employees.desc": "السجلات الرئيسية للموظفين.",
+  "admin.org.company": "الشركة",
+  "admin.org.selectCompany": "اختر شركة",
+  "admin.org.website": "الموقع الإلكتروني",
+  "admin.org.grade": "الدرجة / المستوى",
+  "admin.org.employeeNo": "رقم الموظف",
+  "admin.org.hireDate": "تاريخ التعيين",
+  "admin.org.col.name": "الاسم",
+  "admin.err.name": "الاسم مطلوب",
+  "admin.err.code": "الرمز مطلوب",
+  "admin.err.company": "الشركة مطلوبة",
+  "admin.err.employeeNo": "رقم الموظف مطلوب",
 };
 
 const dicts: Record<Language, Dict> = { en, ar };
