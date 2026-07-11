@@ -50,6 +50,177 @@ export type Database = {
         }
         Relationships: []
       }
+      entity_approvals: {
+        Row: {
+          approver_id: string | null
+          created_at: string
+          decided_at: string | null
+          decision: string
+          entity_id: string
+          entity_type: string
+          id: string
+          note: string | null
+          step_no: number
+        }
+        Insert: {
+          approver_id?: string | null
+          created_at?: string
+          decided_at?: string | null
+          decision?: string
+          entity_id: string
+          entity_type: string
+          id?: string
+          note?: string | null
+          step_no?: number
+        }
+        Update: {
+          approver_id?: string | null
+          created_at?: string
+          decided_at?: string | null
+          decision?: string
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          note?: string | null
+          step_no?: number
+        }
+        Relationships: []
+      }
+      entity_attachments: {
+        Row: {
+          created_at: string
+          entity_id: string
+          entity_type: string
+          file_name: string
+          file_path: string
+          id: string
+          mime_type: string | null
+          size_bytes: number | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          file_name: string
+          file_path: string
+          id?: string
+          mime_type?: string | null
+          size_bytes?: number | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          mime_type?: string | null
+          size_bytes?: number | null
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      entity_comments: {
+        Row: {
+          author_id: string | null
+          body: string
+          created_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          body: string
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          body?: string
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      entity_history: {
+        Row: {
+          action: string
+          actor_id: string | null
+          changes: Json
+          created_at: string
+          entity_id: string
+          entity_type: string
+          from_status: string | null
+          id: string
+          note: string | null
+          to_status: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          changes?: Json
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          from_status?: string | null
+          id?: string
+          note?: string | null
+          to_status?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          changes?: Json
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          from_status?: string | null
+          id?: string
+          note?: string | null
+          to_status?: string | null
+        }
+        Relationships: []
+      }
+      entity_revisions: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          revision_no: number
+          snapshot: Json
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          revision_no: number
+          snapshot: Json
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          revision_no?: number
+          snapshot?: Json
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -76,6 +247,105 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      reference_sources: {
+        Row: {
+          code: string
+          created_at: string
+          description: string | null
+          id: string
+          is_hierarchical: boolean
+          is_system: boolean
+          name_ar: string
+          name_en: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_hierarchical?: boolean
+          is_system?: boolean
+          name_ar: string
+          name_en: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_hierarchical?: boolean
+          is_system?: boolean
+          name_ar?: string
+          name_en?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      reference_values: {
+        Row: {
+          code: string
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json
+          name_ar: string
+          name_en: string
+          parent_id: string | null
+          sort_order: number
+          source_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name_ar: string
+          name_en: string
+          parent_id?: string | null
+          sort_order?: number
+          source_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name_ar?: string
+          name_en?: string
+          parent_id?: string | null
+          sort_order?: number
+          source_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reference_values_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "reference_values"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reference_values_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "reference_sources"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
