@@ -508,6 +508,62 @@ export type Database = {
           },
         ]
       }
+      numbering_sequences: {
+        Row: {
+          company_id: string
+          created_at: string
+          description: string | null
+          doc_type: string
+          id: string
+          is_active: boolean
+          module: string
+          next_value: number
+          padding: number
+          prefix: string
+          reset_policy: string
+          suffix: string
+          updated_at: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          description?: string | null
+          doc_type: string
+          id?: string
+          is_active?: boolean
+          module: string
+          next_value?: number
+          padding?: number
+          prefix?: string
+          reset_policy?: string
+          suffix?: string
+          updated_at?: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          description?: string | null
+          doc_type?: string
+          id?: string
+          is_active?: boolean
+          module?: string
+          next_value?: number
+          padding?: number
+          prefix?: string
+          reset_policy?: string
+          suffix?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "numbering_sequences_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       position_assignments: {
         Row: {
           branch_id: string | null
@@ -726,6 +782,94 @@ export type Database = {
         }
         Relationships: []
       }
+      workflow_steps: {
+        Row: {
+          created_at: string
+          id: string
+          is_optional: boolean
+          min_approvers: number
+          name: string
+          role_required: string | null
+          step_no: number
+          template_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_optional?: boolean
+          min_approvers?: number
+          name: string
+          role_required?: string | null
+          step_no: number
+          template_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_optional?: boolean
+          min_approvers?: number
+          name?: string
+          role_required?: string | null
+          step_no?: number
+          template_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_steps_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workflow_templates: {
+        Row: {
+          code: string
+          company_id: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          module: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          company_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          module: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          company_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          module?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_templates_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -740,7 +884,15 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "manager" | "employee"
+      app_role:
+        | "admin"
+        | "manager"
+        | "employee"
+        | "procurement"
+        | "sales"
+        | "warehouse"
+        | "finance"
+        | "viewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -868,7 +1020,16 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "manager", "employee"],
+      app_role: [
+        "admin",
+        "manager",
+        "employee",
+        "procurement",
+        "sales",
+        "warehouse",
+        "finance",
+        "viewer",
+      ],
     },
   },
 } as const
