@@ -35,6 +35,16 @@ import { Route as AuthCreatePasswordRouteImport } from './routes/auth.create-pas
 import { Route as AppDashboardRouteImport } from './routes/app.dashboard'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminWorkflowIndexRouteImport } from './routes/_authenticated/admin.workflow.index'
+import { Route as AuthenticatedAdminTemplatesIndexRouteImport } from './routes/_authenticated/admin.templates.index'
+import { Route as AuthenticatedAdminSystemIndexRouteImport } from './routes/_authenticated/admin.system.index'
+import { Route as AuthenticatedAdminSecurityIndexRouteImport } from './routes/_authenticated/admin.security.index'
+import { Route as AuthenticatedAdminReferenceDataIndexRouteImport } from './routes/_authenticated/admin.reference-data.index'
+import { Route as AuthenticatedAdminOrganizationIndexRouteImport } from './routes/_authenticated/admin.organization.index'
+import { Route as AuthenticatedAdminNumberingIndexRouteImport } from './routes/_authenticated/admin.numbering.index'
+import { Route as AuthenticatedAdminMasterDataIndexRouteImport } from './routes/_authenticated/admin.master-data.index'
+import { Route as AuthenticatedAdminLanguagesIndexRouteImport } from './routes/_authenticated/admin.languages.index'
+import { Route as AuthenticatedAdminBusinessPartnersIndexRouteImport } from './routes/_authenticated/admin.business-partners.index'
 
 const WizardRoute = WizardRouteImport.update({
   id: '/wizard',
@@ -165,6 +175,66 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminWorkflowIndexRoute =
+  AuthenticatedAdminWorkflowIndexRouteImport.update({
+    id: '/workflow/',
+    path: '/workflow/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminTemplatesIndexRoute =
+  AuthenticatedAdminTemplatesIndexRouteImport.update({
+    id: '/templates/',
+    path: '/templates/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminSystemIndexRoute =
+  AuthenticatedAdminSystemIndexRouteImport.update({
+    id: '/system/',
+    path: '/system/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminSecurityIndexRoute =
+  AuthenticatedAdminSecurityIndexRouteImport.update({
+    id: '/security/',
+    path: '/security/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminReferenceDataIndexRoute =
+  AuthenticatedAdminReferenceDataIndexRouteImport.update({
+    id: '/reference-data/',
+    path: '/reference-data/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminOrganizationIndexRoute =
+  AuthenticatedAdminOrganizationIndexRouteImport.update({
+    id: '/organization/',
+    path: '/organization/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminNumberingIndexRoute =
+  AuthenticatedAdminNumberingIndexRouteImport.update({
+    id: '/numbering/',
+    path: '/numbering/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminMasterDataIndexRoute =
+  AuthenticatedAdminMasterDataIndexRouteImport.update({
+    id: '/master-data/',
+    path: '/master-data/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminLanguagesIndexRoute =
+  AuthenticatedAdminLanguagesIndexRouteImport.update({
+    id: '/languages/',
+    path: '/languages/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminBusinessPartnersIndexRoute =
+  AuthenticatedAdminBusinessPartnersIndexRouteImport.update({
+    id: '/business-partners/',
+    path: '/business-partners/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -192,6 +262,16 @@ export interface FileRoutesByFullPath {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
+  '/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
+  '/admin/master-data/': typeof AuthenticatedAdminMasterDataIndexRoute
+  '/admin/numbering/': typeof AuthenticatedAdminNumberingIndexRoute
+  '/admin/organization/': typeof AuthenticatedAdminOrganizationIndexRoute
+  '/admin/reference-data/': typeof AuthenticatedAdminReferenceDataIndexRoute
+  '/admin/security/': typeof AuthenticatedAdminSecurityIndexRoute
+  '/admin/system/': typeof AuthenticatedAdminSystemIndexRoute
+  '/admin/templates/': typeof AuthenticatedAdminTemplatesIndexRoute
+  '/admin/workflow/': typeof AuthenticatedAdminWorkflowIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -217,6 +297,16 @@ export interface FileRoutesByTo {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard': typeof WizardIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/business-partners': typeof AuthenticatedAdminBusinessPartnersIndexRoute
+  '/admin/languages': typeof AuthenticatedAdminLanguagesIndexRoute
+  '/admin/master-data': typeof AuthenticatedAdminMasterDataIndexRoute
+  '/admin/numbering': typeof AuthenticatedAdminNumberingIndexRoute
+  '/admin/organization': typeof AuthenticatedAdminOrganizationIndexRoute
+  '/admin/reference-data': typeof AuthenticatedAdminReferenceDataIndexRoute
+  '/admin/security': typeof AuthenticatedAdminSecurityIndexRoute
+  '/admin/system': typeof AuthenticatedAdminSystemIndexRoute
+  '/admin/templates': typeof AuthenticatedAdminTemplatesIndexRoute
+  '/admin/workflow': typeof AuthenticatedAdminWorkflowIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -246,6 +336,16 @@ export interface FileRoutesById {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
+  '/_authenticated/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
+  '/_authenticated/admin/master-data/': typeof AuthenticatedAdminMasterDataIndexRoute
+  '/_authenticated/admin/numbering/': typeof AuthenticatedAdminNumberingIndexRoute
+  '/_authenticated/admin/organization/': typeof AuthenticatedAdminOrganizationIndexRoute
+  '/_authenticated/admin/reference-data/': typeof AuthenticatedAdminReferenceDataIndexRoute
+  '/_authenticated/admin/security/': typeof AuthenticatedAdminSecurityIndexRoute
+  '/_authenticated/admin/system/': typeof AuthenticatedAdminSystemIndexRoute
+  '/_authenticated/admin/templates/': typeof AuthenticatedAdminTemplatesIndexRoute
+  '/_authenticated/admin/workflow/': typeof AuthenticatedAdminWorkflowIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -275,6 +375,16 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/admin/'
+    | '/admin/business-partners/'
+    | '/admin/languages/'
+    | '/admin/master-data/'
+    | '/admin/numbering/'
+    | '/admin/organization/'
+    | '/admin/reference-data/'
+    | '/admin/security/'
+    | '/admin/system/'
+    | '/admin/templates/'
+    | '/admin/workflow/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -300,6 +410,16 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard'
     | '/admin'
+    | '/admin/business-partners'
+    | '/admin/languages'
+    | '/admin/master-data'
+    | '/admin/numbering'
+    | '/admin/organization'
+    | '/admin/reference-data'
+    | '/admin/security'
+    | '/admin/system'
+    | '/admin/templates'
+    | '/admin/workflow'
   id:
     | '__root__'
     | '/'
@@ -328,6 +448,16 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/business-partners/'
+    | '/_authenticated/admin/languages/'
+    | '/_authenticated/admin/master-data/'
+    | '/_authenticated/admin/numbering/'
+    | '/_authenticated/admin/organization/'
+    | '/_authenticated/admin/reference-data/'
+    | '/_authenticated/admin/security/'
+    | '/_authenticated/admin/system/'
+    | '/_authenticated/admin/templates/'
+    | '/_authenticated/admin/workflow/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -530,15 +660,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/workflow/': {
+      id: '/_authenticated/admin/workflow/'
+      path: '/workflow'
+      fullPath: '/admin/workflow/'
+      preLoaderRoute: typeof AuthenticatedAdminWorkflowIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/templates/': {
+      id: '/_authenticated/admin/templates/'
+      path: '/templates'
+      fullPath: '/admin/templates/'
+      preLoaderRoute: typeof AuthenticatedAdminTemplatesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/system/': {
+      id: '/_authenticated/admin/system/'
+      path: '/system'
+      fullPath: '/admin/system/'
+      preLoaderRoute: typeof AuthenticatedAdminSystemIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/security/': {
+      id: '/_authenticated/admin/security/'
+      path: '/security'
+      fullPath: '/admin/security/'
+      preLoaderRoute: typeof AuthenticatedAdminSecurityIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/reference-data/': {
+      id: '/_authenticated/admin/reference-data/'
+      path: '/reference-data'
+      fullPath: '/admin/reference-data/'
+      preLoaderRoute: typeof AuthenticatedAdminReferenceDataIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/organization/': {
+      id: '/_authenticated/admin/organization/'
+      path: '/organization'
+      fullPath: '/admin/organization/'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/numbering/': {
+      id: '/_authenticated/admin/numbering/'
+      path: '/numbering'
+      fullPath: '/admin/numbering/'
+      preLoaderRoute: typeof AuthenticatedAdminNumberingIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/master-data/': {
+      id: '/_authenticated/admin/master-data/'
+      path: '/master-data'
+      fullPath: '/admin/master-data/'
+      preLoaderRoute: typeof AuthenticatedAdminMasterDataIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/languages/': {
+      id: '/_authenticated/admin/languages/'
+      path: '/languages'
+      fullPath: '/admin/languages/'
+      preLoaderRoute: typeof AuthenticatedAdminLanguagesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/business-partners/': {
+      id: '/_authenticated/admin/business-partners/'
+      path: '/business-partners'
+      fullPath: '/admin/business-partners/'
+      preLoaderRoute: typeof AuthenticatedAdminBusinessPartnersIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminBusinessPartnersIndexRoute: typeof AuthenticatedAdminBusinessPartnersIndexRoute
+  AuthenticatedAdminLanguagesIndexRoute: typeof AuthenticatedAdminLanguagesIndexRoute
+  AuthenticatedAdminMasterDataIndexRoute: typeof AuthenticatedAdminMasterDataIndexRoute
+  AuthenticatedAdminNumberingIndexRoute: typeof AuthenticatedAdminNumberingIndexRoute
+  AuthenticatedAdminOrganizationIndexRoute: typeof AuthenticatedAdminOrganizationIndexRoute
+  AuthenticatedAdminReferenceDataIndexRoute: typeof AuthenticatedAdminReferenceDataIndexRoute
+  AuthenticatedAdminSecurityIndexRoute: typeof AuthenticatedAdminSecurityIndexRoute
+  AuthenticatedAdminSystemIndexRoute: typeof AuthenticatedAdminSystemIndexRoute
+  AuthenticatedAdminTemplatesIndexRoute: typeof AuthenticatedAdminTemplatesIndexRoute
+  AuthenticatedAdminWorkflowIndexRoute: typeof AuthenticatedAdminWorkflowIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminBusinessPartnersIndexRoute:
+    AuthenticatedAdminBusinessPartnersIndexRoute,
+  AuthenticatedAdminLanguagesIndexRoute: AuthenticatedAdminLanguagesIndexRoute,
+  AuthenticatedAdminMasterDataIndexRoute:
+    AuthenticatedAdminMasterDataIndexRoute,
+  AuthenticatedAdminNumberingIndexRoute: AuthenticatedAdminNumberingIndexRoute,
+  AuthenticatedAdminOrganizationIndexRoute:
+    AuthenticatedAdminOrganizationIndexRoute,
+  AuthenticatedAdminReferenceDataIndexRoute:
+    AuthenticatedAdminReferenceDataIndexRoute,
+  AuthenticatedAdminSecurityIndexRoute: AuthenticatedAdminSecurityIndexRoute,
+  AuthenticatedAdminSystemIndexRoute: AuthenticatedAdminSystemIndexRoute,
+  AuthenticatedAdminTemplatesIndexRoute: AuthenticatedAdminTemplatesIndexRoute,
+  AuthenticatedAdminWorkflowIndexRoute: AuthenticatedAdminWorkflowIndexRoute,
 }
 
 const AuthenticatedAdminRouteWithChildren =
