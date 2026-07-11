@@ -6,8 +6,10 @@ import { useT } from "@/prototype/i18n";
 import { usePrototypeStore } from "@/prototype/store";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useState } from "react";
-import { Mail, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Mail, Loader2, Clock } from "lucide-react";
+
+const OTP_TTL_SECONDS = 300; // 5 minutes
 
 export const Route = createFileRoute("/auth/verify-sent")({
   component: VerifySentPage,
@@ -22,6 +24,18 @@ function VerifySentPage() {
   const [code, setCode] = useState("");
   const [resending, setResending] = useState(false);
   const [verifying, setVerifying] = useState(false);
+  const [expiresAt, setExpiresAt] = useState<number>(() => Date.now() + OTP_TTL_SECONDS * 1000);
+  const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const remaining = Math.max(0, Math.floor((expiresAt - now) / 1000));
+  const expired = remaining === 0;
+  const mm = String(Math.floor(remaining / 60)).padStart(2, "0");
+  const ss = String(remaining % 60).padStart(2, "0");
 
   const resend = async () => {
     if (!email) return;
@@ -32,6 +46,8 @@ function VerifySentPage() {
         options: { shouldCreateUser: true },
       });
       if (error) throw error;
+      setExpiresAt(Date.now() + OTP_TTL_SECONDS * 1000);
+      setCode("");
       toast.success(t("toast.emailSent"));
     } catch (err) {
       toast.error(t("toast.error"), { description: err instanceof Error ? err.message : String(err) });
@@ -42,6 +58,11 @@ function VerifySentPage() {
 
   const verify = async (token: string) => {
     if (!email || token.length !== 6) return;
+    if (expired) {
+      toast.error(t("auth.otp.expired"));
+      setCode("");
+      return;
+    }
     setVerifying(true);
     try {
       const { data, error } = await supabase.auth.verifyOtp({
@@ -76,7 +97,7 @@ function VerifySentPage() {
             setCode(v);
             if (v.length === 6) verify(v);
           }}
-          disabled={verifying}
+          disabled={verifying || expired}
         >
           <InputOTPGroup>
             <InputOTPSlot index={0} />
@@ -87,6 +108,10 @@ function VerifySentPage() {
             <InputOTPSlot index={5} />
           </InputOTPGroup>
         </InputOTP>
+        <div className={`flex items-center gap-2 text-sm font-mono tabular-nums ${expired ? "text-destructive" : "text-muted-foreground"}`}>
+          <Clock className="h-4 w-4" />
+          {expired ? t("auth.otp.expired") : `${mm}:${ss}`}
+        </div>
         {verifying && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" /> {t("auth.otp.verifying")}
@@ -95,7 +120,7 @@ function VerifySentPage() {
       </div>
       <Button onClick={resend} variant="outline" className="w-full" disabled={resending || !email || verifying}>
         {resending && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
-        {t("auth.otp.resend")}
+        {expired ? t("auth.otp.resend") : t("auth.otp.resend")}
       </Button>
       <div className="text-center text-sm">
         <Link to="/auth/email" className="text-primary hover:underline">
