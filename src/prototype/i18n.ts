@@ -642,6 +642,20 @@ const ar: Dict = {
   "admin.sec.noRoles": "لا توجد أدوار",
   "admin.sec.addRole": "إضافة دور...",
   "admin.actions.add": "إضافة",
+  "admin.sys.key": "المفتاح",
+  "admin.sys.value": "القيمة",
+  "admin.sys.global": "عام (كل الشركات)",
+  "admin.sys.companyHint": "اتركه فارغًا لإعداد عام يطبّق على كل الشركات.",
+  "admin.sys.err.key": "المفتاح مطلوب",
+  "admin.lang.nameEn": "الاسم بالإنجليزية",
+  "admin.lang.nameNative": "الاسم الأصلي",
+  "admin.lang.rtl": "من اليمين لليسار",
+  "admin.lang.sort": "الترتيب",
+  "admin.tmpl.entity": "نوع الكيان",
+  "admin.tmpl.fields": "الحقول",
+  "admin.tmpl.fieldsHint": "مصفوفة JSON لتعريفات الحقول: key، label، type، required. تستخدمها النماذج الديناميكية.",
+  "admin.tmpl.err.entity": "نوع الكيان مطلوب",
+  "admin.tmpl.err.json": "الحقول يجب أن تكون مصفوفة JSON صحيحة",
 };
 
 const dicts: Record<Language, Dict> = { en, ar };
