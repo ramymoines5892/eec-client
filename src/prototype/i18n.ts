@@ -315,6 +315,20 @@ const en: Dict = {
   "admin.sec.noRoles": "No roles assigned",
   "admin.sec.addRole": "Add role...",
   "admin.actions.add": "Add",
+  "admin.sys.key": "Key",
+  "admin.sys.value": "Value",
+  "admin.sys.global": "Global (all companies)",
+  "admin.sys.companyHint": "Leave empty for a global setting that applies to all companies.",
+  "admin.sys.err.key": "Key is required",
+  "admin.lang.nameEn": "English Name",
+  "admin.lang.nameNative": "Native Name",
+  "admin.lang.rtl": "Right-to-left",
+  "admin.lang.sort": "Order",
+  "admin.tmpl.entity": "Entity Type",
+  "admin.tmpl.fields": "Fields",
+  "admin.tmpl.fieldsHint": "JSON array of field definitions: key, label, type, required. Consumed by dynamic forms.",
+  "admin.tmpl.err.entity": "Entity type is required",
+  "admin.tmpl.err.json": "Fields must be a valid JSON array",
 };
 
 const ar: Dict = {
@@ -628,6 +642,20 @@ const ar: Dict = {
   "admin.sec.noRoles": "لا توجد أدوار",
   "admin.sec.addRole": "إضافة دور...",
   "admin.actions.add": "إضافة",
+  "admin.sys.key": "المفتاح",
+  "admin.sys.value": "القيمة",
+  "admin.sys.global": "عام (كل الشركات)",
+  "admin.sys.companyHint": "اتركه فارغًا لإعداد عام يطبّق على كل الشركات.",
+  "admin.sys.err.key": "المفتاح مطلوب",
+  "admin.lang.nameEn": "الاسم بالإنجليزية",
+  "admin.lang.nameNative": "الاسم الأصلي",
+  "admin.lang.rtl": "من اليمين لليسار",
+  "admin.lang.sort": "الترتيب",
+  "admin.tmpl.entity": "نوع الكيان",
+  "admin.tmpl.fields": "الحقول",
+  "admin.tmpl.fieldsHint": "مصفوفة JSON لتعريفات الحقول: key، label، type، required. تستخدمها النماذج الديناميكية.",
+  "admin.tmpl.err.entity": "نوع الكيان مطلوب",
+  "admin.tmpl.err.json": "الحقول يجب أن تكون مصفوفة JSON صحيحة",
 };
 
 const dicts: Record<Language, Dict> = { en, ar };
