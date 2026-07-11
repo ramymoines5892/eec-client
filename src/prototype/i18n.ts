@@ -560,6 +560,24 @@ const ar: Dict = {
   "admin.err.code": "الرمز مطلوب",
   "admin.err.company": "الشركة مطلوبة",
   "admin.err.employeeNo": "رقم الموظف مطلوب",
+
+  "admin.bp.legalName": "الاسم القانوني",
+  "admin.bp.legalNameAr": "الاسم القانوني (عربي)",
+  "admin.bp.tradeName": "الاسم التجاري",
+  "admin.bp.taxNo": "الرقم الضريبي",
+  "admin.bp.regNo": "رقم السجل",
+  "admin.bp.roles": "الأدوار",
+  "admin.bp.rolesHint": "يمكن للشريك أن يلعب أدوارًا متعددة. فعّل أو عطّل الأدوار — تبقى البيانات التاريخية سليمة.",
+  "admin.bp.manageRoles": "إدارة الأدوار",
+  "admin.bp.err.legal": "الاسم القانوني مطلوب",
+  "admin.bp.role.customer": "عميل",
+  "admin.bp.role.vendor": "مورد",
+  "admin.bp.role.manufacturer": "مُصنّع",
+  "admin.bp.role.agent": "وكيل",
+  "admin.bp.role.carrier": "ناقل",
+  "admin.bp.role.insurance": "تأمين",
+  "admin.bp.role.bank": "بنك",
+  "admin.bp.role.government": "جهة حكومية",
 };
 
 const dicts: Record<Language, Dict> = { en, ar };
