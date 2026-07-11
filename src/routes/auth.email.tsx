@@ -33,6 +33,7 @@ function EmailPage() {
         email,
         options: {
           shouldCreateUser: true,
+          emailRedirectTo: `${window.location.origin}/auth/verify-result`,
         },
       });
       if (error) throw error;
