@@ -47,6 +47,7 @@ import { Route as AuthenticatedAdminLanguagesIndexRouteImport } from './routes/_
 import { Route as AuthenticatedAdminBusinessPartnersIndexRouteImport } from './routes/_authenticated/admin.business-partners.index'
 import { Route as AuthenticatedAdminReferenceDataSourceIdRouteImport } from './routes/_authenticated/admin.reference-data.$sourceId'
 import { Route as AuthenticatedAdminOrganizationCompaniesRouteImport } from './routes/_authenticated/admin.organization.companies'
+import { Route as AuthenticatedAdminOrganizationBranchesRouteImport } from './routes/_authenticated/admin.organization.branches'
 
 const WizardRoute = WizardRouteImport.update({
   id: '/wizard',
@@ -249,6 +250,12 @@ const AuthenticatedAdminOrganizationCompaniesRoute =
     path: '/organization/companies',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminOrganizationBranchesRoute =
+  AuthenticatedAdminOrganizationBranchesRouteImport.update({
+    id: '/organization/branches',
+    path: '/organization/branches',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -276,6 +283,7 @@ export interface FileRoutesByFullPath {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -313,6 +321,7 @@ export interface FileRoutesByTo {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard': typeof WizardIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners': typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -354,6 +363,7 @@ export interface FileRoutesById {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/_authenticated/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
   '/_authenticated/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/_authenticated/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -395,6 +405,7 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/admin/'
+    | '/admin/organization/branches'
     | '/admin/organization/companies'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners/'
@@ -432,6 +443,7 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard'
     | '/admin'
+    | '/admin/organization/branches'
     | '/admin/organization/companies'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners'
@@ -472,6 +484,7 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/organization/branches'
     | '/_authenticated/admin/organization/companies'
     | '/_authenticated/admin/reference-data/$sourceId'
     | '/_authenticated/admin/business-partners/'
@@ -770,11 +783,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminOrganizationCompaniesRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/organization/branches': {
+      id: '/_authenticated/admin/organization/branches'
+      path: '/organization/branches'
+      fullPath: '/admin/organization/branches'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationBranchesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminOrganizationBranchesRoute: typeof AuthenticatedAdminOrganizationBranchesRoute
   AuthenticatedAdminOrganizationCompaniesRoute: typeof AuthenticatedAdminOrganizationCompaniesRoute
   AuthenticatedAdminReferenceDataSourceIdRoute: typeof AuthenticatedAdminReferenceDataSourceIdRoute
   AuthenticatedAdminBusinessPartnersIndexRoute: typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -791,6 +812,8 @@ interface AuthenticatedAdminRouteChildren {
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminOrganizationBranchesRoute:
+    AuthenticatedAdminOrganizationBranchesRoute,
   AuthenticatedAdminOrganizationCompaniesRoute:
     AuthenticatedAdminOrganizationCompaniesRoute,
   AuthenticatedAdminReferenceDataSourceIdRoute:
