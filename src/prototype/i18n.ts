@@ -250,6 +250,28 @@ const en: Dict = {
   "admin.ref.value.empty": "No values yet. Add your first value to get started.",
   "admin.ref.delete.title": "Delete value?",
   "admin.ref.delete.body": "This value will be permanently removed. This action cannot be undone.",
+
+  "admin.org.companies": "Companies",
+  "admin.org.companies.desc": "Legal entities and organizations.",
+  "admin.org.branches": "Branches",
+  "admin.org.branches.desc": "Physical locations per company.",
+  "admin.org.departments": "Departments",
+  "admin.org.departments.desc": "Organizational departments and units.",
+  "admin.org.jobTitles": "Job Titles",
+  "admin.org.jobTitles.desc": "Reusable job title definitions.",
+  "admin.org.employees": "Employees",
+  "admin.org.employees.desc": "Employee master records.",
+  "admin.org.company": "Company",
+  "admin.org.selectCompany": "Select a company",
+  "admin.org.website": "Website",
+  "admin.org.grade": "Grade / Level",
+  "admin.org.employeeNo": "Employee No.",
+  "admin.org.hireDate": "Hire Date",
+  "admin.org.col.name": "Name",
+  "admin.err.name": "Name is required",
+  "admin.err.code": "Code is required",
+  "admin.err.company": "Company is required",
+  "admin.err.employeeNo": "Employee number is required",
 };
 
 const ar: Dict = {
