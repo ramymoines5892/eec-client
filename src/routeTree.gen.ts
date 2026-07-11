@@ -45,6 +45,7 @@ import { Route as AuthenticatedAdminNumberingIndexRouteImport } from './routes/_
 import { Route as AuthenticatedAdminMasterDataIndexRouteImport } from './routes/_authenticated/admin.master-data.index'
 import { Route as AuthenticatedAdminLanguagesIndexRouteImport } from './routes/_authenticated/admin.languages.index'
 import { Route as AuthenticatedAdminBusinessPartnersIndexRouteImport } from './routes/_authenticated/admin.business-partners.index'
+import { Route as AuthenticatedAdminReferenceDataSourceIdRouteImport } from './routes/_authenticated/admin.reference-data.$sourceId'
 
 const WizardRoute = WizardRouteImport.update({
   id: '/wizard',
@@ -235,6 +236,12 @@ const AuthenticatedAdminBusinessPartnersIndexRoute =
     path: '/business-partners/',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminReferenceDataSourceIdRoute =
+  AuthenticatedAdminReferenceDataSourceIdRouteImport.update({
+    id: '/reference-data/$sourceId',
+    path: '/reference-data/$sourceId',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -262,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
   '/admin/master-data/': typeof AuthenticatedAdminMasterDataIndexRoute
@@ -297,6 +305,7 @@ export interface FileRoutesByTo {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard': typeof WizardIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages': typeof AuthenticatedAdminLanguagesIndexRoute
   '/admin/master-data': typeof AuthenticatedAdminMasterDataIndexRoute
@@ -336,6 +345,7 @@ export interface FileRoutesById {
   '/wizard/success': typeof WizardSuccessRoute
   '/wizard/': typeof WizardIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/_authenticated/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/_authenticated/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
   '/_authenticated/admin/master-data/': typeof AuthenticatedAdminMasterDataIndexRoute
@@ -375,6 +385,7 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/admin/'
+    | '/admin/reference-data/$sourceId'
     | '/admin/business-partners/'
     | '/admin/languages/'
     | '/admin/master-data/'
@@ -410,6 +421,7 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard'
     | '/admin'
+    | '/admin/reference-data/$sourceId'
     | '/admin/business-partners'
     | '/admin/languages'
     | '/admin/master-data'
@@ -448,6 +460,7 @@ export interface FileRouteTypes {
     | '/wizard/success'
     | '/wizard/'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/reference-data/$sourceId'
     | '/_authenticated/admin/business-partners/'
     | '/_authenticated/admin/languages/'
     | '/_authenticated/admin/master-data/'
@@ -730,11 +743,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBusinessPartnersIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/reference-data/$sourceId': {
+      id: '/_authenticated/admin/reference-data/$sourceId'
+      path: '/reference-data/$sourceId'
+      fullPath: '/admin/reference-data/$sourceId'
+      preLoaderRoute: typeof AuthenticatedAdminReferenceDataSourceIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminReferenceDataSourceIdRoute: typeof AuthenticatedAdminReferenceDataSourceIdRoute
   AuthenticatedAdminBusinessPartnersIndexRoute: typeof AuthenticatedAdminBusinessPartnersIndexRoute
   AuthenticatedAdminLanguagesIndexRoute: typeof AuthenticatedAdminLanguagesIndexRoute
   AuthenticatedAdminMasterDataIndexRoute: typeof AuthenticatedAdminMasterDataIndexRoute
@@ -749,6 +770,8 @@ interface AuthenticatedAdminRouteChildren {
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminReferenceDataSourceIdRoute:
+    AuthenticatedAdminReferenceDataSourceIdRoute,
   AuthenticatedAdminBusinessPartnersIndexRoute:
     AuthenticatedAdminBusinessPartnersIndexRoute,
   AuthenticatedAdminLanguagesIndexRoute: AuthenticatedAdminLanguagesIndexRoute,
