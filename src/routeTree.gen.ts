@@ -45,6 +45,7 @@ import { Route as AuthenticatedAdminNumberingIndexRouteImport } from './routes/_
 import { Route as AuthenticatedAdminMasterDataIndexRouteImport } from './routes/_authenticated/admin.master-data.index'
 import { Route as AuthenticatedAdminLanguagesIndexRouteImport } from './routes/_authenticated/admin.languages.index'
 import { Route as AuthenticatedAdminBusinessPartnersIndexRouteImport } from './routes/_authenticated/admin.business-partners.index'
+import { Route as AuthenticatedAdminWorkflowTemplateIdRouteImport } from './routes/_authenticated/admin.workflow.$templateId'
 import { Route as AuthenticatedAdminReferenceDataSourceIdRouteImport } from './routes/_authenticated/admin.reference-data.$sourceId'
 import { Route as AuthenticatedAdminOrganizationJobTitlesRouteImport } from './routes/_authenticated/admin.organization.job-titles'
 import { Route as AuthenticatedAdminOrganizationEmployeesRouteImport } from './routes/_authenticated/admin.organization.employees'
@@ -242,6 +243,12 @@ const AuthenticatedAdminBusinessPartnersIndexRoute =
     path: '/business-partners/',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminWorkflowTemplateIdRoute =
+  AuthenticatedAdminWorkflowTemplateIdRouteImport.update({
+    id: '/workflow/$templateId',
+    path: '/workflow/$templateId',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminReferenceDataSourceIdRoute =
   AuthenticatedAdminReferenceDataSourceIdRouteImport.update({
     id: '/reference-data/$sourceId',
@@ -318,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
   '/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
+  '/admin/workflow/$templateId': typeof AuthenticatedAdminWorkflowTemplateIdRoute
   '/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
   '/admin/master-data/': typeof AuthenticatedAdminMasterDataIndexRoute
@@ -360,6 +368,7 @@ export interface FileRoutesByTo {
   '/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
   '/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
+  '/admin/workflow/$templateId': typeof AuthenticatedAdminWorkflowTemplateIdRoute
   '/admin/business-partners': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/admin/languages': typeof AuthenticatedAdminLanguagesIndexRoute
   '/admin/master-data': typeof AuthenticatedAdminMasterDataIndexRoute
@@ -406,6 +415,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
   '/_authenticated/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/_authenticated/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
+  '/_authenticated/admin/workflow/$templateId': typeof AuthenticatedAdminWorkflowTemplateIdRoute
   '/_authenticated/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
   '/_authenticated/admin/languages/': typeof AuthenticatedAdminLanguagesIndexRoute
   '/_authenticated/admin/master-data/': typeof AuthenticatedAdminMasterDataIndexRoute
@@ -452,6 +462,7 @@ export interface FileRouteTypes {
     | '/admin/organization/employees'
     | '/admin/organization/job-titles'
     | '/admin/reference-data/$sourceId'
+    | '/admin/workflow/$templateId'
     | '/admin/business-partners/'
     | '/admin/languages/'
     | '/admin/master-data/'
@@ -494,6 +505,7 @@ export interface FileRouteTypes {
     | '/admin/organization/employees'
     | '/admin/organization/job-titles'
     | '/admin/reference-data/$sourceId'
+    | '/admin/workflow/$templateId'
     | '/admin/business-partners'
     | '/admin/languages'
     | '/admin/master-data'
@@ -539,6 +551,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/organization/employees'
     | '/_authenticated/admin/organization/job-titles'
     | '/_authenticated/admin/reference-data/$sourceId'
+    | '/_authenticated/admin/workflow/$templateId'
     | '/_authenticated/admin/business-partners/'
     | '/_authenticated/admin/languages/'
     | '/_authenticated/admin/master-data/'
@@ -821,6 +834,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBusinessPartnersIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/workflow/$templateId': {
+      id: '/_authenticated/admin/workflow/$templateId'
+      path: '/workflow/$templateId'
+      fullPath: '/admin/workflow/$templateId'
+      preLoaderRoute: typeof AuthenticatedAdminWorkflowTemplateIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/reference-data/$sourceId': {
       id: '/_authenticated/admin/reference-data/$sourceId'
       path: '/reference-data/$sourceId'
@@ -882,6 +902,7 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminOrganizationEmployeesRoute: typeof AuthenticatedAdminOrganizationEmployeesRoute
   AuthenticatedAdminOrganizationJobTitlesRoute: typeof AuthenticatedAdminOrganizationJobTitlesRoute
   AuthenticatedAdminReferenceDataSourceIdRoute: typeof AuthenticatedAdminReferenceDataSourceIdRoute
+  AuthenticatedAdminWorkflowTemplateIdRoute: typeof AuthenticatedAdminWorkflowTemplateIdRoute
   AuthenticatedAdminBusinessPartnersIndexRoute: typeof AuthenticatedAdminBusinessPartnersIndexRoute
   AuthenticatedAdminLanguagesIndexRoute: typeof AuthenticatedAdminLanguagesIndexRoute
   AuthenticatedAdminMasterDataIndexRoute: typeof AuthenticatedAdminMasterDataIndexRoute
@@ -910,6 +931,8 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
     AuthenticatedAdminOrganizationJobTitlesRoute,
   AuthenticatedAdminReferenceDataSourceIdRoute:
     AuthenticatedAdminReferenceDataSourceIdRoute,
+  AuthenticatedAdminWorkflowTemplateIdRoute:
+    AuthenticatedAdminWorkflowTemplateIdRoute,
   AuthenticatedAdminBusinessPartnersIndexRoute:
     AuthenticatedAdminBusinessPartnersIndexRoute,
   AuthenticatedAdminLanguagesIndexRoute: AuthenticatedAdminLanguagesIndexRoute,
