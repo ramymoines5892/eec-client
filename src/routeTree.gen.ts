@@ -47,6 +47,7 @@ import { Route as AuthenticatedAdminLanguagesIndexRouteImport } from './routes/_
 import { Route as AuthenticatedAdminBusinessPartnersIndexRouteImport } from './routes/_authenticated/admin.business-partners.index'
 import { Route as AuthenticatedAdminReferenceDataSourceIdRouteImport } from './routes/_authenticated/admin.reference-data.$sourceId'
 import { Route as AuthenticatedAdminOrganizationJobTitlesRouteImport } from './routes/_authenticated/admin.organization.job-titles'
+import { Route as AuthenticatedAdminOrganizationEmployeesRouteImport } from './routes/_authenticated/admin.organization.employees'
 import { Route as AuthenticatedAdminOrganizationDepartmentsRouteImport } from './routes/_authenticated/admin.organization.departments'
 import { Route as AuthenticatedAdminOrganizationCompaniesRouteImport } from './routes/_authenticated/admin.organization.companies'
 import { Route as AuthenticatedAdminOrganizationBranchesRouteImport } from './routes/_authenticated/admin.organization.branches'
@@ -252,6 +253,12 @@ const AuthenticatedAdminOrganizationJobTitlesRoute =
     path: '/organization/job-titles',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminOrganizationEmployeesRoute =
+  AuthenticatedAdminOrganizationEmployeesRouteImport.update({
+    id: '/organization/employees',
+    path: '/organization/employees',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminOrganizationDepartmentsRoute =
   AuthenticatedAdminOrganizationDepartmentsRouteImport.update({
     id: '/organization/departments',
@@ -300,6 +307,7 @@ export interface FileRoutesByFullPath {
   '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
   '/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  '/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
   '/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -340,6 +348,7 @@ export interface FileRoutesByTo {
   '/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
   '/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  '/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
   '/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/admin/business-partners': typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -384,6 +393,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/organization/branches': typeof AuthenticatedAdminOrganizationBranchesRoute
   '/_authenticated/admin/organization/companies': typeof AuthenticatedAdminOrganizationCompaniesRoute
   '/_authenticated/admin/organization/departments': typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  '/_authenticated/admin/organization/employees': typeof AuthenticatedAdminOrganizationEmployeesRoute
   '/_authenticated/admin/organization/job-titles': typeof AuthenticatedAdminOrganizationJobTitlesRoute
   '/_authenticated/admin/reference-data/$sourceId': typeof AuthenticatedAdminReferenceDataSourceIdRoute
   '/_authenticated/admin/business-partners/': typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -428,6 +438,7 @@ export interface FileRouteTypes {
     | '/admin/organization/branches'
     | '/admin/organization/companies'
     | '/admin/organization/departments'
+    | '/admin/organization/employees'
     | '/admin/organization/job-titles'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners/'
@@ -468,6 +479,7 @@ export interface FileRouteTypes {
     | '/admin/organization/branches'
     | '/admin/organization/companies'
     | '/admin/organization/departments'
+    | '/admin/organization/employees'
     | '/admin/organization/job-titles'
     | '/admin/reference-data/$sourceId'
     | '/admin/business-partners'
@@ -511,6 +523,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/organization/branches'
     | '/_authenticated/admin/organization/companies'
     | '/_authenticated/admin/organization/departments'
+    | '/_authenticated/admin/organization/employees'
     | '/_authenticated/admin/organization/job-titles'
     | '/_authenticated/admin/reference-data/$sourceId'
     | '/_authenticated/admin/business-partners/'
@@ -809,6 +822,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminOrganizationJobTitlesRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/organization/employees': {
+      id: '/_authenticated/admin/organization/employees'
+      path: '/organization/employees'
+      fullPath: '/admin/organization/employees'
+      preLoaderRoute: typeof AuthenticatedAdminOrganizationEmployeesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/organization/departments': {
       id: '/_authenticated/admin/organization/departments'
       path: '/organization/departments'
@@ -838,6 +858,7 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminOrganizationBranchesRoute: typeof AuthenticatedAdminOrganizationBranchesRoute
   AuthenticatedAdminOrganizationCompaniesRoute: typeof AuthenticatedAdminOrganizationCompaniesRoute
   AuthenticatedAdminOrganizationDepartmentsRoute: typeof AuthenticatedAdminOrganizationDepartmentsRoute
+  AuthenticatedAdminOrganizationEmployeesRoute: typeof AuthenticatedAdminOrganizationEmployeesRoute
   AuthenticatedAdminOrganizationJobTitlesRoute: typeof AuthenticatedAdminOrganizationJobTitlesRoute
   AuthenticatedAdminReferenceDataSourceIdRoute: typeof AuthenticatedAdminReferenceDataSourceIdRoute
   AuthenticatedAdminBusinessPartnersIndexRoute: typeof AuthenticatedAdminBusinessPartnersIndexRoute
@@ -860,6 +881,8 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
     AuthenticatedAdminOrganizationCompaniesRoute,
   AuthenticatedAdminOrganizationDepartmentsRoute:
     AuthenticatedAdminOrganizationDepartmentsRoute,
+  AuthenticatedAdminOrganizationEmployeesRoute:
+    AuthenticatedAdminOrganizationEmployeesRoute,
   AuthenticatedAdminOrganizationJobTitlesRoute:
     AuthenticatedAdminOrganizationJobTitlesRoute,
   AuthenticatedAdminReferenceDataSourceIdRoute:
